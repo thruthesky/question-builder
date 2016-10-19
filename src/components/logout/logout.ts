@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginPage } from '../../pages/login/login';
-import { Questionsform } from '../questionsform/questionsform';
+import { Dashboard } from '../../pages/dashboard/dashboard';
+//import { Questionsform } from '../questionsform/questionsform';
 import { NavController, Events, ViewController } from 'ionic-angular';
 import { NavParams } from 'ionic-angular';
 import * as xi from '../../xmodule/interfaces/xapi';
@@ -41,7 +42,7 @@ export class Logout {
   logout() {
     
     this.user = '';
-    this.navCtrl.setRoot(LoginPage);
+    this.navCtrl.setRoot(Dashboard);
   }
   onClickLogout() {
         // this.x.logout();

@@ -4,7 +4,6 @@ import { NavController } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
 
-import { LoginPage } from '../pages/login/login';
 import { Dashboard } from '../pages/dashboard/dashboard';
 
 
@@ -22,8 +21,4 @@ export class MyApp {
       StatusBar.styleDefault();
     });
   }
-  ngAfterViewInit() {
-      // Let's navigate from TabsPage to Page1
-      this.nav.setRoot(LoginPage);
-   }
 }

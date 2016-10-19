@@ -9,6 +9,7 @@ import * as xi from '../../xmodule/interfaces/xapi';
 import { Xapi } from '../../xmodule/providers/xapi';
 import { PageController } from '../../xmodule/providers/page-controller';
 import { AlertController } from 'ionic-angular';
+import { QuestionList } from '../question-list/question-list';
 
 @Component({
   selector: 'page-dashboard',
@@ -20,59 +21,43 @@ export class Dashboard {
   user: xi.UserLoginData;
   
   constructor(private navCtrl: NavController, private alertCtrl: AlertController, private viewCtrl: ViewController ,private events: Events,private x: Xapi, private navPar: NavParams) {
-      this.x.getLoginData( x => this.login(x) );
-      this.userLogged = this.navPar.get('thisstring');
-
-    PageController.page.login = LoginPage;
-    PageController.page.register = RegisterPage;
-
-  }
-
-  onClickChange(){
-    console.log('Change Password');
-    let prompt = this.alertCtrl.create({
-      title: 'Change Password',
-      message: "Enter a name for this new album you're so keen on adding",
-      inputs: [
-        {
-          name: 'Current',
-          placeholder: 'Your current password'
-        },{
-          name: 'New',
-          placeholder: 'Your new password'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            console.log();
-          }
-        },
-        {
-          text: 'Save',
-          handler: data => {
-            console.log(data.Current, data.New);
+    console.log("Dashboard::constructor()");
+      this.x.getLoginData( (user:xi.UserLoginData) => {
+        console.log( 'Dashboard::constructor() x.getLogin() callback: ', user);
+        if ( user ) {
+          if ( user.user_login == 'admin' ) this.user = user;
+          else {
+            this.x.error("Please login as admin.");
+            this.x.logout();
+            navCtrl.setRoot( LoginPage );
           }
         }
-      ]
-    });
-    prompt.present();
+        else navCtrl.setRoot( LoginPage );
+      } );
   }
-
+  
   
   ionViewDidLoad() {
-    console.log("HomePage::ionViewDidLoad()");
+    setTimeout( () => {
+      this.onClickList();
+    } , 400 );
   }
-  onClickDelete(){
-    console.log('delete');
-    this.navCtrl.push(Delete);
-  }
-  login( u: xi.UserLoginData ) {
-    this.user = u;
-  }
-  onClickAdd(){
-    this.navCtrl.push( Questionsform );
-    
+
+  onClickLogout() {
+    console.log("onClickLogout()");
+    this.x.logout();
+    this.user = '';
   } 
+  
+  onClickLogin() {
+    this.navCtrl.setRoot( LoginPage );
+  }
+  
+  onClickAdd() {
+    this.navCtrl.setRoot( Questionsform );
+  }
+  
+  onClickList() {
+    this.navCtrl.setRoot( QuestionList ); 
+  }
 }

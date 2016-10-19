@@ -8,10 +8,11 @@ import { XModule } from '../xmodule/modules/core';
 import { Logout } from '../components/logout/logout';
 import { Createupdate } from '../components/createupdate/createupdate';
 import { List } from '../components/list/list'
-import { PostListComponent } from '../xmodule/components/post-list/post-list';
+//import { PostListComponent } from '../xmodule/components/post-list/post-list';
 import { Questionsform } from '../pages/questionsform/questionsform';
 import { CreateUpdateForm } from '../pages/form/form';
 import { Delete } from '../pages/delete/delete';
+import { QuestionList } from '../pages/question-list/question-list';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { Delete } from '../pages/delete/delete';
     CreateUpdateForm,
     Createupdate,
     Delete,
+    QuestionList
   
   ],
   imports: [
@@ -44,7 +46,7 @@ import { Delete } from '../pages/delete/delete';
     CreateUpdateForm,
     Createupdate,
     Delete,
-  
+    QuestionList
   ],
   providers: [ ]
 })

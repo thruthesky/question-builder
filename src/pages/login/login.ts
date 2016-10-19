@@ -33,10 +33,8 @@ export class LoginPage {
     this.loading = false;
   }
   onSuccess( user: xi.UserLoginData) {
-    console.log("onSuccess()");
-    this.api.alert("LOGIN OK", `Welcome, ${user.user_login}. You have logged in.`);
-    this.navCtrl.push(Dashboard,{thisstring:user.user_login});
-    
+    console.log("onSuccess()", user);
+    this.navCtrl.setRoot(Dashboard);
   }
   onError( message ) {
     console.log("onError()");
