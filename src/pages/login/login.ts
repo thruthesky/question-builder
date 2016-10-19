@@ -4,7 +4,6 @@ import { NavController } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
 import { LoginComponent } from '../../xmodule/components/login';
 import { Dashboard } from '../dashboard/dashboard';
-import { PageController } from '../../xmodule/providers/page-controller';
 import { Xapi } from '../../xmodule/providers/xapi';
 import * as xi from '../../xmodule/interfaces/xapi';
 @Component({
