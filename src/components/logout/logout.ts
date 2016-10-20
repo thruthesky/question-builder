@@ -24,29 +24,13 @@ export class Logout {
   user: xi.UserLoginData;
   
   constructor(private navCtrl: NavController, private viewCtrl: ViewController ,private events: Events,private x: Xapi, private navPar: NavParams) {
-      this.userLogged = this.navPar.get('thisstring');
-    
-
-    this.events.subscribe( 'logout', () => {
-      console.log('HomePage::constructor::event logout');
-      this.logout();
-    });
-    this.events.subscribe( 'resign', () => {
-      console.log('HomePage::constructor::event resign');
-      this.logout();
-    });
     PageController.page.login = LoginPage;
     
 
   }
-  logout() {
-    
-    this.user = '';
-    this.navCtrl.setRoot(Dashboard);
-  }
   onClickLogout() {
-        // this.x.logout();
-        this.x.alert("Log out", "Logging out");
-        this.logout();
+    console.log("onClickLogout()");
+    this.x.logout();
+    this.user = '';
   }
 }

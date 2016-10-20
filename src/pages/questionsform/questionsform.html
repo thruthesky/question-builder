@@ -11,7 +11,7 @@
   <ion-list>
     <ion-item>
       <ion-label floating>Question</ion-label>
-      <ion-input type="text" [(ngModel)]="questionForm.post_title"></ion-input>
+      <ion-input type="text" [(ngModel)]="questionForm.title"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Choice 1</ion-label>
@@ -36,4 +36,5 @@
       <button ion-button (click)="onClickSubmit()">Submit</button>
       <button ion-button (click)="onClickBack()">Back</button>
   </ion-list>
+
 </ion-content>

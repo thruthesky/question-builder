@@ -38,15 +38,18 @@ export class Dashboard {
   
   
   ionViewDidLoad() {
-    setTimeout( () => {
-      this.onClickList();
-    } , 400 );
+    // setTimeout( () => {
+    //   this.onClickList();
+    // } , 400 );
   }
 
   onClickLogout() {
     console.log("onClickLogout()");
     this.x.logout();
     this.user = '';
+    setTimeout(()=>{
+      this.navCtrl.setRoot(LoginPage);
+    }, 300)
   } 
   
   onClickLogin() {
