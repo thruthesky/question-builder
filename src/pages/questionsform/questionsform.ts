@@ -49,8 +49,8 @@ export class Questionsform {
 
     onClickSubmit() {
       console.log('question: ' + this.questionForm );
-      this.questionForm.content = this.questionForm.title;
-      this.questionForm.first_name = this.user.user_login;
+      //this.questionForm.content = this.questionForm.title;
+      // this.questionForm.first_name = this.user.user_login;
       this.questionForm.category = 'question';
       
       this.x.post_insert( this.questionForm, re => {
@@ -62,7 +62,6 @@ export class Questionsform {
         this.x.error( err );
       });
     }
-    
     
     onClickBack() {
       this.navCtrl.setRoot( Dashboard );
