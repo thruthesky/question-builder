@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Xapi } from '../../xmodule/providers/xapi';
 import { QuestionForm } from '../../providers/share';
 import { Dashboard } from '../dashboard/dashboard';
@@ -8,17 +8,21 @@ import * as xi from '../../xmodule/interfaces/xapi';
   templateUrl: 'questionsform.html'
 })
 export class Questionsform {
-
+  id:number;
+  title:string;
+  QuestionTitle:string;
   user: xi.UserLoginData;
-  
   questionForm : QuestionForm = <QuestionForm> {};
 
   constructor(
+    private navP: NavParams,
     public navCtrl: NavController,
     private x: Xapi
     ) {
+      this.id = this.navP.get('id');
+      console.log(this.id);
       console.log( 'PostListPage::constructor()');
-
+      this.title = this.navP.get('title');
       this.x.getLoginData( (user:xi.UserLoginData) => {
         console.log( 'Dashboard::constructor() x.getLogin() callback: ', user);
          if ( user ) {
@@ -33,8 +37,10 @@ export class Questionsform {
       });
     }
 
-
-
+    test(){
+      console.log(this.navP.get('id'));
+    }
+    
     // test() {
       
     //   this.questionForm.title = "What is one in number?";
@@ -46,13 +52,12 @@ export class Questionsform {
     //   this.onClickSubmit();
     // }
 
-
     onClickSubmit() {
       console.log('question: ' + this.questionForm );
       //this.questionForm.content = this.questionForm.title;
       // this.questionForm.first_name = this.user.user_login;
       this.questionForm.category = 'question';
-      
+      this.questionForm.password = 'default';
       this.x.post_insert( this.questionForm, re => {
         console.log("QuestionForm::onClickSubmit() callback()", re);
         if ( re.success ) {
@@ -62,7 +67,6 @@ export class Questionsform {
         this.x.error( err );
       });
     }
-    
     onClickBack() {
       this.navCtrl.setRoot( Dashboard );
     }

@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { Questionsform } from '../questionsform/questionsform'
 import { Xapi } from '../../xmodule/providers/xapi';
 import * as xi from '../../xmodule/interfaces/xapi';
+import { QuestionForm } from '../../providers/share';
 import { Dashboard } from '../dashboard/dashboard';
 import { NavController } from 'ionic-angular';
 @Component( {
     templateUrl: `question-list.html`
 })
 export class QuestionList {
+    questionForm : QuestionForm = <QuestionForm> {};
     posts: xi.PostQueryResponse;
     constructor( private x: Xapi, private navCtrl: NavController ) {
         console.log('Dashboard::onClickList()');
@@ -26,12 +28,16 @@ export class QuestionList {
         
     }
     onClickUpdate(ID){
-        console.log(ID);
-        // this.navCtrl.setRoot( Questionsform );
+        this.navCtrl.setRoot( Questionsform,{
+            title:'Update',
+            id: ID
+        } );
     }
 
     onClickDelete(ID){
         console.log(ID);
+        this.questionForm.ID = ID;
+        this.questionForm.password = 'default';
         this.x.delete_post( ID,(res: xi.Response) => {
             if(res.success){
                 delete this.posts[ res.data ];

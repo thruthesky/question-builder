@@ -1,7 +1,8 @@
 export interface QuestionForm  {
-    first_name:string;
+    ID:number;
+    password?:string;
     category: string;
-    title : string;
+    post_title : string;
     content?:string;
     choice1 : string;
     choice2 : string;

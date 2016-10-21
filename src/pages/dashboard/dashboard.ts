@@ -57,7 +57,9 @@ export class Dashboard {
   }
   
   onClickAdd() {
-    this.navCtrl.setRoot( Questionsform );
+    this.navCtrl.setRoot( Questionsform, {
+      title: 'Create'
+    } );
   }
   
   onClickList() {
