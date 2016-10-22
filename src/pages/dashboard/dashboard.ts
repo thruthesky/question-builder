@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { LoginPage } from '../login/login';
-import { RegisterPage } from '../register/register';
 import { Questionsform } from '../questionsform/questionsform';
-import { Delete } from '../delete/delete';
+
 import { NavController, Events, ViewController } from 'ionic-angular';
 import { NavParams } from 'ionic-angular';
 import * as xi from '../../xmodule/interfaces/xapi';
 import { Xapi } from '../../xmodule/providers/xapi';
-import { PageController } from '../../xmodule/providers/page-controller';
+
 import { AlertController } from 'ionic-angular';
 import { QuestionList } from '../question-list/question-list';
 

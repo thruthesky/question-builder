@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginPage } from '../../pages/login/login';
-import { Dashboard } from '../../pages/dashboard/dashboard';
-//import { Questionsform } from '../questionsform/questionsform';
+
+
 import { NavController, Events, ViewController } from 'ionic-angular';
 import { NavParams } from 'ionic-angular';
 import * as xi from '../../xmodule/interfaces/xapi';
@@ -20,7 +20,7 @@ import { PageController } from '../../xmodule/providers/page-controller';
 })
 export class Logout {
 
-  userLogged:string;
+
   user: xi.UserLoginData;
   
   constructor(private navCtrl: NavController, private viewCtrl: ViewController ,private events: Events,private x: Xapi, private navPar: NavParams) {

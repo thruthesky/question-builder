@@ -10,7 +10,6 @@ import * as xi from '../../xmodule/interfaces/xapi';
 export class Questionsform {
   id:number;
   title:string;
-  QuestionTitle:string;
   user: xi.UserLoginData;
   questionForm : QuestionForm = <QuestionForm> {};
 
@@ -40,9 +39,9 @@ export class Questionsform {
     test(){
       console.log(this.navP.get('id'));
     }
-    
+
     // test() {
-      
+
     //   this.questionForm.title = "What is one in number?";
     //   this.questionForm.choice1 = "7";
     //   this.questionForm.choice2 = "17";
@@ -52,16 +51,13 @@ export class Questionsform {
     //   this.onClickSubmit();
     // }
 
-    onClickSubmit() {
+    onClickCreate() {
       console.log('question: ' + this.questionForm );
-      //this.questionForm.content = this.questionForm.title;
-      // this.questionForm.first_name = this.user.user_login;
       this.questionForm.category = 'question';
-      this.questionForm.password = 'default';
       this.x.post_insert( this.questionForm, re => {
         console.log("QuestionForm::onClickSubmit() callback()", re);
         if ( re.success ) {
-          this.questionForm = <QuestionForm> {};         
+          this.questionForm = <QuestionForm> {};
         }
       }, err => {
         this.x.error( err );
@@ -69,5 +65,22 @@ export class Questionsform {
     }
     onClickBack() {
       this.navCtrl.setRoot( Dashboard );
+    }
+
+    onClickUpdate(){
+      console.log(this.id);
+      console.log('question: ' + this.questionForm );
+      this.questionForm.category = 'question';
+      this.questionForm.ID = this.id
+      this.x.post_insert( this.questionForm, re => {
+        console.log("QuestionForm::onClickSubmit() callback()", re);
+        if ( re.success ) {
+          this.questionForm = <QuestionForm> {};
+        }
+      }, err => {
+        this.x.error( err );
+      });
+
+
     }
 }

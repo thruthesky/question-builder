@@ -33,9 +33,9 @@
       <ion-label floating>Answer: No of the choice.</ion-label>
       <ion-input type="text" [(ngModel)]="questionForm.answer"></ion-input>
     </ion-item>
-      <button ion-button (click)="onClickSubmit()">Submit</button>
+      <button ion-button *ngIf="id" (click)="onClickUpdate()">Update</button>
+      <button ion-button (click)="onClickCreate()" *ngIf="!id">Create</button>
       <button ion-button (click)="onClickBack()">Back</button>
   </ion-list>
-  <button ion-button (click)="test()">test</button>
 
 </ion-content>

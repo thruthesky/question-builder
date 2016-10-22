@@ -27,17 +27,15 @@ export class QuestionList {
         this.navCtrl.setRoot( Dashboard );
         
     }
-    onClickUpdate(ID){
+    onClickUpdate(id){
         this.navCtrl.setRoot( Questionsform,{
             title:'Update',
-            id: ID
+            id: id
         } );
     }
 
     onClickDelete(ID){
         console.log(ID);
-        this.questionForm.ID = ID;
-        this.questionForm.password = 'default';
         this.x.delete_post( ID,(res: xi.Response) => {
             if(res.success){
                 delete this.posts[ res.data ];
