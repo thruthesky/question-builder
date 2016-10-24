@@ -52,7 +52,8 @@
 
       <button ion-button (click)="onClickCreate()" *ngIf="!post_ID">Create</button>
       <button ion-button (click)="onClickCreate()" *ngIf="post_ID">Update</button>
-      <button ion-button (click)="onClickBack()">Back</button>
+      <button ion-button (click)="onClickBack()" *ngIf="!post_ID">Back</button>
+      <button ion-button (click)="onClickBackToList()"*ngIf="post_ID">Back</button>
     </ion-list>
 
 

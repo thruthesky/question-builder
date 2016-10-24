@@ -4,6 +4,7 @@ import { Xapi } from '../../xmodule/providers/xapi';
 import * as xi from '../../xmodule/interfaces/xapi';
 import { PostEditPage } from '../post-edit/post-edit';
 import { NavController, AlertController } from 'ionic-angular';
+import { Dashboard } from '../dashboard/dashboard';
 
 
 //////////////////////////////////////
@@ -125,6 +126,10 @@ export class PostListPage {
       // console.log( PageController.page );
       this.navCtrl.push( PostEditPage, { post_ID: post_ID });
   }
+  onClickBack(){
+    this.navCtrl.setRoot(Dashboard);
+  }
+
   onClickDelete( ID ) {
     console.log('onClickDel()', ID);
     console.log(ID);

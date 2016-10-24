@@ -8,7 +8,6 @@ import { XModule } from '../xmodule/modules/core';
 import { List } from '../components/list/list'
 import { Questionsform } from '../pages/questionsform/questionsform';
 import { CreateUpdateForm } from '../pages/form/form';
-import { Delete } from '../pages/delete/delete';
 import { QuestionList } from '../pages/question-list/question-list';
 import { PostListPage } from '../pages/post-list/post-list';
 import { PostEditPage } from '../pages/post-edit/post-edit';
@@ -24,7 +23,6 @@ import { PostEditPage } from '../pages/post-edit/post-edit';
     List,
     CreateUpdateForm,
     PostListPage,
-    Delete,
     QuestionList,
     PostEditPage
 
@@ -42,7 +40,6 @@ import { PostEditPage } from '../pages/post-edit/post-edit';
     Questionsform,
     List,
     CreateUpdateForm,
-    Delete,
     QuestionList,
     PostListPage,
     PostEditPage

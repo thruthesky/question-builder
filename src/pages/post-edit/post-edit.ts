@@ -6,15 +6,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, Events } from 'ionic-angular';
 import { PostEditService } from '../../xmodule/providers/post-edit-service';
 import { Dashboard } from '../dashboard/dashboard';
-/** -------------------------------------------------------------
- * Post data interface & var
- * This should be customized on your need post data strucure.
- * Cannot find a simple way not to write interface or data type
- * @note Data Structure
- *  - When the post data is saved, unknown data will be saved into meta.
- *  - When the post data arrived from server, all meta data will be saved in 'meta' property as object.
- *
- *///------------------------------------------------------------
+import { PostListPage } from '../post-list/post-list'
+
 export const category: string = 'question';
 export interface POST { // post data basic strucure
     ID?:number;
@@ -125,5 +118,8 @@ export class PostEditPage {
   }
   onClickBack() {
     this.navCtrl.setRoot( Dashboard );
+  }
+    onClickBackToList(){
+    this.navCtrl.setRoot(PostListPage);
   }
 }
