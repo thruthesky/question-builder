@@ -1,43 +1,65 @@
-import { Component} from '@angular/core';
-import { ViewChild } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { ViewController } from 'ionic-angular';
-import { LoginComponent } from '../../xmodule/components/login';
-import { Dashboard } from '../dashboard/dashboard';
+import { Component } from '@angular/core';
 import { Xapi } from '../../xmodule/providers/xapi';
 import * as xi from '../../xmodule/interfaces/xapi';
 @Component({
-  selector: 'page-login',
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  appTitle = "Login";
+  user: xi.UserLogin = xi.userLogin;
   loading: boolean = false;
-  errorMessage: string = '';
+  message: string = '';
+  t = {
+    User_ID: 'User ID',
+    Password: 'Password',
+    Input_User_ID: 'Input User ID',
+    Input_Password: 'Input Password',
+    Login: 'Login',
+    Cancel: 'Cancel'
+  };
 
-  @ViewChild('Login') userLog: LoginComponent;
-  constructor(public navCtrl: NavController,private api: Xapi, private viewCtrl: ViewController) {
-    console.log("LoginPage::constrcutor()");
-    
+  constructor(
+    private api: Xapi
+    ) {
+    console.log('LoginComponent::constructor()');
+    this.api.getLoginData( x => this.userAlreadyLoggedIn(x) );
   }
-  ionViewDidLoad() {
-    this.userLog.t.Login = "Sign in";
+
+  /**
+   * 회원이 이미 로그인을 한 경우 이 함수가 호출된다.
+   */
+  userAlreadyLoggedIn( user: xi.UserLoginData ) {
   }
-  onBeforeRequest() {
-    console.log("onBeforeRequest()");
+
+  onClickLogin() {
+    console.log("LoginComponent::onClickRegister()");
     this.loading = true;
-    this.errorMessage = '';
+ 
+    this.api.login( this.user, ( re: xi.RegisterResponse ) => {
+      this.loading = false;
+      this.message = '';
+      
+      if ( re.success ) {
+        console.log("LoginComponent::onClickRegister() success");
+ 
+      }
+      else {
+        console.log("LoginComponent::onClickRegister() error");
+        this.message = <string>re.data;
+      }
+    },
+    ( err ) => {
+      this.loading = false;
+
+      console.log('LoginComponent::onClickRegister() error: ', err);
+
+    });
   }
-  onAfterRequest() {
-    console.log("onAfterRequest()");
+
+  onClickCancel() {
     this.loading = false;
+    console.log("LoginComponent::onClickCancel()");
+
   }
-  onSuccess( user: xi.UserLoginData) {
-    console.log("onSuccess()", user);
-    this.navCtrl.setRoot(Dashboard);
-  }
-  onError( message ) {
-    console.log("onError()");
-    this.errorMessage = message;
-  }
+
 }
+

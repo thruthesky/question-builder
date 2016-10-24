@@ -33,7 +33,7 @@ export class Dashboard {
         }
         else navCtrl.setRoot( LoginPage );
       } );
-      x.serverUrl = "http://work.org/wordpress/index.php";
+      x.serverUrl = "http://work.org/wordpress/index.php/";
   }
   
   

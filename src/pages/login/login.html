@@ -7,11 +7,28 @@
 </ion-header>
 
 <ion-content padding>
-  <xapilogin #Login
-      (beforeRequest)="onBeforeRequest($event)"
-      (afterRequest)="onAfterRequest($event)"
-      (success)="onSuccess($event)"
-      (cancel)="onCancel($event)"
-      (error)="onError($event)"
-  ></xapilogin>
+      <ion-list>
+      <ion-item>
+        <ion-label primary stacked>{{t.User_ID}}</ion-label>
+        <ion-input [(ngModel)]="user.user_login" placeholder="{{t.Input_User_ID}}"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label primary stacked>{{t.Password}}</ion-label>
+        <ion-input [(ngModel)]="user.user_pass" type="password" placeholder="{{t.Input_Password}}"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="loading">
+        <ion-spinner></ion-spinner> Loading ...
+      </ion-item>
+      <ion-item *ngIf="message">
+        <ion-icon name="star"></ion-icon> {{ message }}
+      </ion-item>
+
+     
+       
+     
+
+  </ion-list>
+   <button ion-button block outline (click)="onClickLogin()">{{t.Login}}</button>
 </ion-content>
