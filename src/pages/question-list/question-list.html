@@ -3,16 +3,36 @@
             <ion-title>Question List</ion-title>
         </ion-navbar>
     </ion-header>
-    
-    <ion-content padding>
-        
-        <ion-list>
-            <ion-item *ngFor = "let post of posts" >
-                <div>{{ post.post_title }} </div>
 
-                <button ion-button (click)="onClickUpdate(post.ID)">edit</button>
-                <button ion-button (click)="onClickDelete(post.ID)">delete</button>
-            </ion-item>
+    <ion-content padding>
+
+        <ion-list *ngFor = "let post of posts; let i = index" >
+
+          <ion-item>
+            <ion-card>
+                <div padding-left>Question {{ i + 1 }}:</div>
+                <div padding>{{ post.post_title }} </div>
+              <ion-item>
+                <hr/>
+                <div>Choice no.1: {{ post.meta.choice1 }}</div>
+                <div>Choice no.2: {{ post.meta.choice2 }}</div>
+                <div>Choice no.3: {{ post.meta.choice3 }}</div>
+                <div>Choice no.4: {{ post.meta.choice4}}</div>
+                <hr/>
+              </ion-item>
+              <ion-item>
+                <div>Answer: {{ post.meta.answer }}</div>
+              </ion-item>
+
+            </ion-card>
+
+          <button ion-button block round (click)="onClickUpdate(post.ID)">edit</button>
+          <button ion-button block round color="danger" (click)="onClickDelete(post.ID)">delete</button>
+         </ion-item>
+
         </ion-list>
         <button ion-button (click)="onClickBack()">Back</button>
+
+
+
     </ion-content>

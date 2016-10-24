@@ -19,19 +19,19 @@
     </ion-item>
     <ion-item>
       <ion-label floating>Choice 2</ion-label>
-      <ion-input type="text" [(ngModel)]="questionForm.choice2"></ion-input>
+      <ion-input type="text" [(ngModel)]="questionForm.meta.choice2"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Choice 3</ion-label>
-      <ion-input type="text" [(ngModel)]="questionForm.choice3"></ion-input>
+      <ion-input type="text" [(ngModel)]="questionForm.meta.choice3"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Choice 4</ion-label>
-      <ion-input type="text" [(ngModel)]="questionForm.choice4"></ion-input>
+      <ion-input type="text" [(ngModel)]="questionForm.meta.choice4"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Answer: No of the choice.</ion-label>
-      <ion-input type="text" [(ngModel)]="questionForm.answer"></ion-input>
+      <ion-input type="text" [(ngModel)]="questionForm.meta.answer"></ion-input>
     </ion-item>
       <button ion-button *ngIf="id" (click)="onClickUpdate()">Update</button>
       <button ion-button (click)="onClickCreate()" *ngIf="!id">Create</button>

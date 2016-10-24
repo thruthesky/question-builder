@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { LoginPage } from '../login/login';
-import { Questionsform } from '../questionsform/questionsform';
-
+// import { Questionsform } from '../questionsform/questionsform';
+import { PostEditPage } from  '../post-edit/post-edit';
 import { NavController, Events, ViewController } from 'ionic-angular';
 import { NavParams } from 'ionic-angular';
 import * as xi from '../../xmodule/interfaces/xapi';
 import { Xapi } from '../../xmodule/providers/xapi';
-
+import { PostListPage } from '../post-list/post-list';
 import { AlertController } from 'ionic-angular';
-import { QuestionList } from '../question-list/question-list';
+// import { QuestionList } from '../question-list/question-list';
 
 @Component({
   selector: 'page-dashboard',
@@ -33,6 +33,7 @@ export class Dashboard {
         }
         else navCtrl.setRoot( LoginPage );
       } );
+      x.serverUrl = "http://work.org/wordpress/index.php";
   }
   
   
@@ -56,12 +57,12 @@ export class Dashboard {
   }
   
   onClickAdd() {
-    this.navCtrl.setRoot( Questionsform, {
+    this.navCtrl.setRoot( PostEditPage, {
       title: 'Create'
     } );
   }
   
   onClickList() {
-    this.navCtrl.setRoot( QuestionList ); 
+    this.navCtrl.setRoot( PostListPage );
   }
 }

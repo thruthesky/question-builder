@@ -8,7 +8,7 @@ import * as xi from '../../xmodule/interfaces/xapi';
     <ion-list>
       <ion-item>
         <ion-label primary stacked>{{t.User_ID}}</ion-label>
-        <ion-input [(ngModel)]="user.user_login" placeholder="asd"></ion-input>
+        <ion-input [(ngModel)]="user.user_login" placeholder="{{t.Input_User_ID}}"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -23,11 +23,12 @@ import * as xi from '../../xmodule/interfaces/xapi';
         <ion-icon name="star"></ion-icon> {{ message }}
       </ion-item>
 
-      <ion-item>
-        <button ion-button block outline (click)="onClickLogin()">{{t.Login}}</button>
-      </ion-item>
+     
+       
+     
 
   </ion-list>
+   <button ion-button block outline (click)="onClickLogin()">{{t.Login}}</button>
   `
 })
 export class LoginComponent {
@@ -83,7 +84,7 @@ export class LoginComponent {
       this.loading = false;
       this.afterRequest.emit(this);
       console.log('LoginComponent::onClickRegister() error: ', err);
-      
+
     });
   }
 

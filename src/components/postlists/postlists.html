@@ -1,0 +1,22 @@
+<br/>
+<section id="post-list">
+    <ion-card *ngFor=" let post of posts ">
+        <ion-item class="header">
+            <h2>{{ post.post_title }}</h2>
+
+        </ion-item>
+        <ion-card-content>
+            <div>ChoiceNo.1: {{ post.meta.choice1 }}</div>
+            <div>ChoiceNo.2: {{ post.meta.choice2 }}</div>
+            <div>ChoiceNo.3: {{ post.meta.choice3 }}</div>
+            <div>ChoiceNo.4: {{ post.meta.choice4 }}</div>
+            <div>Answer: {{ post.meta.answer }}</div>
+          <div>{{post.meta.password}}</div>
+        </ion-card-content>
+        <ion-item>
+
+        </ion-item>
+                <button ion-button (click)="onClickEdit( post.ID )">Edit</button>
+                <button ion-button (click)="onClickDelete( post.ID )">Delete</button>
+    </ion-card>
+</section>

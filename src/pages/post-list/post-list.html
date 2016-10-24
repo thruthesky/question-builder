@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Question List</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div>
+  <postlist
+    #xapiPostList
+    [slug]="slug"
+    (edit)="onClickEdit( $event )"
+    (delete)="onClickDelete( $event )"
+    (userPosts)="onClickUserPosts( $event )"
+  ></postlist>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <button ion-button (click)="onClickBack()">Back</button>
+
+</ion-content>
