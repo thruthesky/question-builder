@@ -82,8 +82,6 @@ export class QuestionList {
             if(res.success){
               delete this.posts[ post_ID ];
               this.posts.splice(i,1);
-
-              this.x.alert('Delete','Question Deleted successfully');
             }else{
               this.x.error ( res.data.message );
             }
