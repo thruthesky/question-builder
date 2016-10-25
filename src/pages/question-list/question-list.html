@@ -1,20 +1,14 @@
-
 <ion-header>
-
   <ion-navbar>
     <ion-title>Question List</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding>
 <br/>
 <section id="post-list">
     <ion-card *ngFor=" let post of posts; let i = index " class="QuestionList">
         <ion-item class="header">
             <h2>{{ post.post_title }}</h2>
-
         </ion-item>
         <ion-card-content>
             <div>ChoiceNo.1: {{ post.meta.choice1 }}</div>
@@ -27,10 +21,6 @@
                 <button ion-button (click)="onClickDelete( post.ID, i )">Delete</button>
     </ion-card>
     <button ion-button (click)="onClickBack()">Back</button>
-
 </section>
-   
-
-
 </ion-content>
 

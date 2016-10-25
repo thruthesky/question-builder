@@ -61,7 +61,6 @@ export class QuestionList {
         () => {} );
   }
   onClickEdit( post_ID ) {
-      console.log("PostListPage::onClickEdit()", post_ID);
       this.navCtrl.push( PostEditPage, { post_ID: post_ID });
   }
   onClickBack(){
@@ -70,6 +69,7 @@ export class QuestionList {
 
   onClickDelete( post_ID, i ) {
     let obj = {post_ID: post_ID, password: 'default'};
+
     let confirmDelete = this.alrtCtrl.create({
       title: 'Confirmation',
       subTitle:'Are you sure you want to delete this question',
@@ -81,6 +81,8 @@ export class QuestionList {
           this.x.delete_post(obj ,(res: xi.Response) => {
             if(res.success){
               delete this.posts[ post_ID ];
+              this.posts.splice(i,1);
+
               this.x.alert('Delete','Question Deleted successfully');
             }else{
               this.x.error ( res.data.message );
