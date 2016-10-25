@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, Events } from 'ionic-angular';
 import { PostEditService } from '../../xmodule/providers/post-edit-service';
 import { Dashboard } from '../dashboard/dashboard';
-import { PostListPage } from '../post-list/post-list'
+import { QuestionList } from '../question-list/question-list';
 
 export const category: string = 'question';
 export interface POST { // post data basic strucure
@@ -72,8 +72,6 @@ export class PostEditPage {
       this.post = postData();
       this.urlPhoto = postEditService.urlPhoto;
       this.post_ID = navParams.get( 'post_ID' );
-
-
       if ( this.post_ID ) {
         postEditService.load( this.post_ID, (p:POST_DATA) => {
           this.post = trimPostDataForForm( p );
@@ -83,17 +81,15 @@ export class PostEditPage {
   onClickCreate() {
     this.postEditService.submit( trimPostDataForSubmit( this.post ), x => this.onClickPostComplete( x ) );
   }
-
   onClickPostComplete( data ) {
     console.log("PostEditPage::onClickPostComplete()", data);
     this.post = postData(); // clear user input post data after submit success.
     alert("Post upload success");
   }
-
   onClickBack() {
     this.navCtrl.setRoot( Dashboard );
   }
     onClickBackToList(){
-    this.navCtrl.setRoot(PostListPage);
+    this.navCtrl.setRoot(QuestionList);
   }
 }

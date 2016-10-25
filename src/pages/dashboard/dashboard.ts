@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { LoginPage } from '../login/login';
-// import { Questionsform } from '../questionsform/questionsform';
 import { PostEditPage } from  '../post-edit/post-edit';
 import { NavController, Events, ViewController } from 'ionic-angular';
 import { NavParams } from 'ionic-angular';
 import * as xi from '../../xmodule/interfaces/xapi';
 import { Xapi } from '../../xmodule/providers/xapi';
-import { PostListPage } from '../post-list/post-list';
+import { QuestionList } from '../question-list/question-list';
 import { AlertController } from 'ionic-angular';
 // import { QuestionList } from '../question-list/question-list';
 
@@ -63,6 +62,6 @@ export class Dashboard {
   }
   
   onClickList() {
-    this.navCtrl.setRoot( PostListPage );
+    this.navCtrl.setRoot( QuestionList );
   }
 }
