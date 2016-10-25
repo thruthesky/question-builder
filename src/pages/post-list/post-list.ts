@@ -69,21 +69,20 @@ export class PostListPage {
     this.navCtrl.setRoot(Dashboard);
   }
 
-  onClickDelete( ID ) {
-    console.log('onClickDel()', ID);
-    console.log(ID);
+  onClickDelete( post_ID, i ) {
+    let obj = {post_ID: post_ID, password: 'default'};
     let confirmDelete = this.alrtCtrl.create({
       title: 'Confirmation',
       subTitle:'Are you sure you want to delete this question',
       buttons:[{
         text:'Ok',
         handler: ()=>{
-          console.log('deleteClicked OK');;
-          this.x.delete_post( ID,(res: xi.Response) => {
+          console.log('deleteClicked OK');
+
+          this.x.delete_post(obj ,(res: xi.Response) => {
             if(res.success){
-              delete this.posts[ res.data ];
+              delete this.posts[ post_ID ];
               this.x.alert('Delete','Question Deleted successfully');
-              this.navCtrl.push(this);
             }else{
               this.x.error ( res.data.message );
             }

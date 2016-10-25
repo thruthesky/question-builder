@@ -15,9 +15,9 @@ export interface QuestionForm  {
 };
 
 
-export interface PostQuery {
+export class PostQuery {
   ID:number;
-  password?:string;
+  password?:string = 'default';
   category: string;
   post_title : string;
   category_name: string;
