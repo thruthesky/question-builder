@@ -1,7 +1,3 @@
-/**
- * Post eidt ( new & update ) page.
- *
- */
 import { Component } from '@angular/core';
 import { NavController, NavParams, Events } from 'ionic-angular';
 import { PostEditService } from '../../xmodule/providers/post-edit-service';
@@ -15,12 +11,11 @@ export interface POST { // post data basic strucure
     category: string;
     post_title : string;
     content?:string;
-        choice1 : string;
-        choice2 : string;
-        choice3 : string;
-        choice4 : string;
-        answer : number | string;
-
+    choice1 : string;
+    choice2 : string;
+    choice3 : string;
+    choice4 : string;
+    answer : number | string;
 }
 export interface POST_DATA extends POST { // post data from server ( to be displayed )
   images?: {};
@@ -33,9 +28,6 @@ export let postData: () => POST_DATA = () : POST_DATA => {
     category: category,password: 'default', post_title : '', choice1:'',choice2:'',choice3:'',choice4:'',answer:''
   };
 }
-/**
- * Returns trimed post data from server to display as user input.
- */
 export let trimPostDataForForm: (x) => POST_DATA = (x) : POST_DATA => {
   let p: POST_DATA = <POST_DATA> {};
   p.ID = x.ID;
@@ -51,20 +43,12 @@ export let trimPostDataForForm: (x) => POST_DATA = (x) : POST_DATA => {
   else p.images = {};
   return p;
 }
-
 export let trimPostDataForSubmit: (x) => POST_SUBMIT = (x) : POST_SUBMIT => {
-    let post = JSON.parse( JSON.stringify( x ) ); // Soft copy on new object ( new placeholder )
-    if ( post.images ) post.fid = Object.keys( post.images ); // get images to send to server
-    delete post['images']; // delete images of display
+    let post = JSON.parse( JSON.stringify( x ) );
+    if ( post.images ) post.fid = Object.keys( post.images ); 
+    delete post['images']; 
     return post;
   }
-// This is not needed.
-//export let postSubmit: POST_SUBMIT = { category: 'housemaid', post_title : '', post_content : '', meta: { name: '', mobile: '', password: '' }, fid: [] };
-// EO Post data interface & var
-
-
-
-
 @Component({
   selector: 'page-post-edit',
   templateUrl: 'post-edit.html'
@@ -88,7 +72,7 @@ export class PostEditPage {
       this.post = postData();
       this.urlPhoto = postEditService.urlPhoto;
       this.post_ID = navParams.get( 'post_ID' );
-      events.subscribe('file-upload-success', x => this.onSuccessFileUpload(x[0]));
+
 
       if ( this.post_ID ) {
         postEditService.load( this.post_ID, (p:POST_DATA) => {
@@ -96,7 +80,6 @@ export class PostEditPage {
         });
       }
   }
-
   onClickCreate() {
     this.postEditService.submit( trimPostDataForSubmit( this.post ), x => this.onClickPostComplete( x ) );
   }
@@ -107,15 +90,6 @@ export class PostEditPage {
     alert("Post upload success");
   }
 
-  onChangeFileBrowser( $event ) {
-      this.postEditService.upload( $event.target.files );
-  }
-
-  // Displays image.
-  // This method is called on file-upload-success event.
-  private onSuccessFileUpload( file ) {
-    this.post.images[ file.id ] = file.url ;
-  }
   onClickBack() {
     this.navCtrl.setRoot( Dashboard );
   }

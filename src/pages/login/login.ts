@@ -1,32 +1,22 @@
 import { Component } from '@angular/core';
 import { Xapi } from '../../xmodule/providers/xapi';
 import * as xi from '../../xmodule/interfaces/xapi';
+import { NavController } from 'ionic-angular';
+import { Dashboard } from '../dashboard/dashboard';
 @Component({
   templateUrl: 'login.html'
 })
 export class LoginPage {
   user: xi.UserLogin = xi.userLogin;
   loading: boolean = false;
-  message: string = '';
-  t = {
-    User_ID: 'User ID',
-    Password: 'Password',
-    Input_User_ID: 'Input User ID',
-    Input_Password: 'Input Password',
-    Login: 'Login',
-    Cancel: 'Cancel'
-  };
-
+  resultmessage: string = '';
   constructor(
-    private api: Xapi
+    private api: Xapi,
+    private navCtrl: NavController
     ) {
     console.log('LoginComponent::constructor()');
     this.api.getLoginData( x => this.userAlreadyLoggedIn(x) );
   }
-
-  /**
-   * 회원이 이미 로그인을 한 경우 이 함수가 호출된다.
-   */
   userAlreadyLoggedIn( user: xi.UserLoginData ) {
   }
 
@@ -35,16 +25,16 @@ export class LoginPage {
     this.loading = true;
  
     this.api.login( this.user, ( re: xi.RegisterResponse ) => {
-      this.loading = false;
-      this.message = '';
+    this.loading = false;
+    this.resultmessage = '';
       
       if ( re.success ) {
         console.log("LoginComponent::onClickRegister() success");
- 
+        this.navCtrl.setRoot( Dashboard );
       }
       else {
         console.log("LoginComponent::onClickRegister() error");
-        this.message = <string>re.data;
+        this.resultmessage = <string>re.data;
       }
     },
     ( err ) => {
@@ -54,12 +44,5 @@ export class LoginPage {
 
     });
   }
-
-  onClickCancel() {
-    this.loading = false;
-    console.log("LoginComponent::onClickCancel()");
-
-  }
-
 }
 

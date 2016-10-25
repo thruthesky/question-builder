@@ -9,26 +9,22 @@
 <ion-content padding>
       <ion-list>
       <ion-item>
-        <ion-label primary stacked>{{t.User_ID}}</ion-label>
-        <ion-input [(ngModel)]="user.user_login" placeholder="{{t.Input_User_ID}}"></ion-input>
+        <ion-label primary stacked>User ID</ion-label>
+        <ion-input [(ngModel)]="user.user_login"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label primary stacked>{{t.Password}}</ion-label>
-        <ion-input [(ngModel)]="user.user_pass" type="password" placeholder="{{t.Input_Password}}"></ion-input>
+        <ion-label primary stacked>Password</ion-label>
+        <ion-input [(ngModel)]="user.user_pass" type="password"></ion-input>
       </ion-item>
 
       <ion-item *ngIf="loading">
         <ion-spinner></ion-spinner> Loading ...
       </ion-item>
       <ion-item *ngIf="message">
-        <ion-icon name="star"></ion-icon> {{ message }}
+        <ion-icon name="star"></ion-icon> {{ resultmessage }}
       </ion-item>
 
-     
-       
-     
-
   </ion-list>
-   <button ion-button block outline (click)="onClickLogin()">{{t.Login}}</button>
+   <button ion-button block outline (click)="onClickLogin()">Login</button>
 </ion-content>

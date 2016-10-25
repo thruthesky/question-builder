@@ -6,64 +6,6 @@ import { PostEditPage } from '../post-edit/post-edit';
 import { NavController, AlertController } from 'ionic-angular';
 import { Dashboard } from '../dashboard/dashboard';
 
-
-//////////////////////////////////////
-
-
-export const category: string = 'question';
-export interface POST { // post data basic strucure
-  ID?:number;
-  password?:string;
-  category: string;
-  post_title : string;
-  content?:string;
-  choice1 : string;
-  choice2 : string;
-  choice3 : string;
-  choice4 : string;
-  answer : number | string;
-
-}
-export interface POST_DATA extends POST { // post data from server ( to be displayed )
-  images?: {};
-}
-export interface POST_SUBMIT extends POST { // post data to send to server
-  fid?: Array< string >;
-}
-export let postData: () => POST_DATA = () : POST_DATA => {
-  return {
-    category: category,password: 'default', post_title : '', choice1:'',choice2:'',choice3:'',choice4:'',answer:''
-  };
-}
-/**
- * Returns trimed post data from server to display as user input.
- */
-export let trimPostDataForForm: (x) => POST_DATA = (x) : POST_DATA => {
-  let p: POST_DATA = <POST_DATA> {};
-  p.ID = x.ID;
-  p.category = category;
-  p.post_title = x.post_title;
-  p.choice1 = x.meta.choice1;
-  p.choice2 = x.meta.choice2;
-  p.choice3 = x.meta.choice3;
-  p.choice4 = x.meta.choice4;
-  p.password = x.meta.password;
-  p.answer = x.meta.answer;
-  if ( x.images ) p.images = x.images;
-  else p.images = {};
-  return p;
-}
-
-export let trimPostDataForSubmit: (x) => POST_SUBMIT = (x) : POST_SUBMIT => {
-  let post = JSON.parse( JSON.stringify( x ) ); // Soft copy on new object ( new placeholder )
-  if ( post.images ) post.fid = Object.keys( post.images ); // get images to send to server
-  delete post['images']; // delete images of display
-  return post;
-}
-
-
-//////////////////////////
-
 @Component({
   selector: 'postlist',
   templateUrl: 'post-list.html'
@@ -71,7 +13,7 @@ export let trimPostDataForSubmit: (x) => POST_SUBMIT = (x) : POST_SUBMIT => {
 export class PostListPage {
   @Input() slug: string;
   more = [];
-  post: POST_DATA = postData();
+
   posts: xi.Posts = [];
   page: number = 0;
   featuredImage: string = "x-assets/img/sunset.jpg";
@@ -81,7 +23,6 @@ export class PostListPage {
       private navCtrl: NavController,
       private alrtCtrl: AlertController
   ) {
-    this.post = postData();
     console.log('PostListComponent::constructor()', this.slug);
   }
   ngOnInit() {
@@ -122,8 +63,6 @@ export class PostListPage {
   }
   onClickEdit( post_ID ) {
       console.log("PostListPage::onClickEdit()", post_ID);
-
-      // console.log( PageController.page );
       this.navCtrl.push( PostEditPage, { post_ID: post_ID });
   }
   onClickBack(){
@@ -142,7 +81,7 @@ export class PostListPage {
           console.log('deleteClicked OK');;
           this.x.delete_post( ID,(res: xi.Response) => {
             if(res.success){
-              delete this.post[ res.data ];
+              delete this.posts[ res.data ];
               this.x.alert('Delete','Question Deleted successfully');
               this.navCtrl.push(this);
             }else{
