@@ -17,7 +17,7 @@ export class Dashboard {
   appTitle = "Hello World!";
   userLogged:string;
   user: xi.UserLoginData;
-  
+
   constructor(private navCtrl: NavController, private alertCtrl: AlertController, private viewCtrl: ViewController ,private events: Events,private x: Xapi, private navPar: NavParams) {
     console.log("Dashboard::constructor()");
       this.x.getLoginData( (user:xi.UserLoginData) => {
@@ -34,8 +34,8 @@ export class Dashboard {
       } );
       x.serverUrl = "http://work.org/wordpress/index.php/";
   }
-  
-  
+
+
   ionViewDidLoad() {
     // setTimeout( () => {
     //   this.onClickList();
@@ -49,18 +49,18 @@ export class Dashboard {
     setTimeout(()=>{
       this.navCtrl.setRoot(LoginPage);
     }, 300)
-  } 
-  
+  }
+
   onClickLogin() {
     this.navCtrl.setRoot( LoginPage );
   }
-  
+
   onClickAdd() {
     this.navCtrl.setRoot( PostEditPage, {
       title: 'Create'
     } );
   }
-  
+
   onClickList() {
     this.navCtrl.setRoot( QuestionList );
   }
