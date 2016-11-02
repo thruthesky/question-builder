@@ -1,0 +1,48 @@
+<!--
+  Generated template for the Questions page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>questions</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+    <ion-list>
+    <ion-item>
+      <ion-label floating>Question</ion-label>
+      <ion-input type="text" [(ngModel)]="post.title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Choice 1</ion-label>
+      <ion-input type="text" [(ngModel)]="post.choice1"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Choice 2</ion-label>
+      <ion-input type="text" [(ngModel)]="post.choice2"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Choice 3</ion-label>
+      <ion-input type="text" [(ngModel)]="post.choice3"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Choice 4</ion-label>
+      <ion-input type="text" [(ngModel)]="post.choice4"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Answer: No of the choice.</ion-label>
+      <ion-input type="text" [(ngModel)]="post.answer"></ion-input>
+    </ion-item>
+      <button ion-button (click)="onClickCreate()">Create</button>
+      <button ion-button (click)="onClickBack()">Back</button>
+  </ion-list>
+
+</ion-content>

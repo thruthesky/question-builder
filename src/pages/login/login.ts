@@ -1,48 +1,43 @@
 import { Component } from '@angular/core';
-import { Xapi } from '../../xmodule/providers/xapi';
-import * as xi from '../../xmodule/interfaces/xapi';
 import { NavController } from 'ionic-angular';
-import { Dashboard } from '../dashboard/dashboard';
+import * as firebase from 'firebase';
+import { UserAuth } from '../../providers/user-auth';
+import { HomePage } from '../home/home';
+
+/*
+  Generated class for the Login page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
 @Component({
+  selector: 'page-login',
   templateUrl: 'login.html'
 })
-export class LoginPage {
-  user: xi.UserLogin = xi.userLogin;
+export class Login {
+  user:string;
+  password:string;
   loading: boolean = false;
-  resultmessage: string = '';
+  
+
   constructor(
-    private api: Xapi,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private userAuth: UserAuth
     ) {
-    console.log('LoginComponent::constructor()');
-    this.api.getLoginData( x => this.userAlreadyLoggedIn(x) );
-  }
-  userAlreadyLoggedIn( user: xi.UserLoginData ) {
   }
 
-  onClickLogin() {
-    console.log("LoginComponent::onClickRegister()");
+  ionViewDidLoad() {
+    console.log( 'Hello Login Page' );
+  }
+
+  onClickLogin(){
     this.loading = true;
- 
-    this.api.login( this.user, ( re: xi.RegisterResponse ) => {
-    this.loading = false;
-    this.resultmessage = '';
-      
-      if ( re.success ) {
-        console.log("LoginComponent::onClickRegister() success");
-        this.navCtrl.setRoot( Dashboard );
-      }
-      else {
-        console.log("LoginComponent::onClickRegister() error");
-        this.resultmessage = <string>re.data;
-      }
-    },
-    ( err ) => {
-      this.loading = false;
-
-      console.log('LoginComponent::onClickRegister() error: ', err);
-
-    });
+    this.userAuth.login(this.user, this.password)
+      .then(userAuth =>{
+      this.navCtrl.setRoot( HomePage );
+    }, error => {
+      alert(error.message)
+    })
   }
-}
 
+}

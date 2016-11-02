@@ -1,32 +1,36 @@
+<!--
+  Generated template for the Login page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
 <ion-header>
 
-  <ion-navbar hideBackButton>
-    <ion-title>User Login</ion-title>
+  <ion-navbar>
+    <ion-title>login</ion-title>
   </ion-navbar>
 
 </ion-header>
+
 
 <ion-content padding>
       <ion-list>
       <ion-item>
         <ion-label primary stacked>User ID</ion-label>
-        <ion-input [(ngModel)]="user.user_login"></ion-input>
+        <ion-input [(ngModel)]="user" type="email"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label primary stacked>Password</ion-label>
-        <ion-input [(ngModel)]="user.user_pass" type="password"></ion-input>
+        <ion-input [(ngModel)]="password" type="password"></ion-input>
       </ion-item>
 
       <ion-item *ngIf="loading">
         <ion-spinner></ion-spinner> Loading ...
       </ion-item>
-      <ion-item *ngIf="message">
-        <ion-icon name="star"></ion-icon> {{ resultmessage }}
-      </ion-item>
 
   </ion-list>
    <button ion-button block outline (click)="onClickLogin()">Login</button>
+   <button ion-button (click)="onClickSignup()">Register</button>
 
-   
 </ion-content>
