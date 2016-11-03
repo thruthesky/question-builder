@@ -9,9 +9,27 @@
 <ion-content padding>
   <button ion-button>Login</button>
   <button ion-button (click)="onClickAdd()">Create Questions</button>
-  <ion-list>
+  <!--<ion-list>
     <ion-item *ngFor="let id of questions">
       {{ data[id].title }}
     </ion-item>
+  </ion-list>-->
+
+
+
+    <ion-list>
+ 
+   <ion-item-sliding *ngFor="let id of questions">
+ 
+    <ion-item>
+    {{ data[id].title }}
+    </ion-item>
+ 
+    <ion-item-options>
+      <button ion-button color="secondary"> Edit</button>
+      <button ion-button color="danger">Delete</button>
+    </ion-item-options>
+  </ion-item-sliding>
+ 
   </ion-list>
 </ion-content>
