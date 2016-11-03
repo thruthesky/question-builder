@@ -41,8 +41,11 @@
       <ion-label floating>Answer: No of the choice.</ion-label>
       <ion-input type="text" [(ngModel)]="post.answer"></ion-input>
     </ion-item>
-      <button ion-button (click)="onClickCreate()">Create</button>
+      <button ion-button (click)="onClickCreate()" *ngIf="!questionID">Create</button>
+      <button ion-button (click)="onClickUpdate()" *ngIf="questionID">Update</button>
       <button ion-button (click)="onClickBack()">Back</button>
   </ion-list>
+
+
 
 </ion-content>

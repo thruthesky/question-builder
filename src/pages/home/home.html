@@ -18,18 +18,18 @@
 
 
     <ion-list>
- 
+
    <ion-item-sliding *ngFor="let id of questions">
- 
+
     <ion-item>
     {{ data[id].title }}
     </ion-item>
- 
+
     <ion-item-options>
-      <button ion-button color="secondary"> Edit</button>
-      <button ion-button color="danger">Delete</button>
+      <button ion-button color="secondary" (click)="onClickUpdate(id)"> Edit</button>
+      <button ion-button color="danger" (click)="onClickDelete(id)">Delete</button>
     </ion-item-options>
   </ion-item-sliding>
- 
+
   </ion-list>
 </ion-content>

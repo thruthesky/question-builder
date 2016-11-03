@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { QuestionsPage } from '../questions/questions';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { Post } from '../../fireframe/post';
 
 @Component({
@@ -10,8 +10,11 @@ import { Post } from '../../fireframe/post';
 export class HomePage {
   question: Post = new Post();
   data;
-  constructor(private navCtrl: NavController) {
-    
+  constructor(
+    private navCtrl: NavController,
+    private alrtCtrl: AlertController
+  ) {
+
   }
   ionViewWillEnter() {
     console.log('CategoryPage will enter');
@@ -24,14 +27,44 @@ export class HomePage {
   displayQuestions() {
     this.question.gets( re => {
       console.log(re);
-      this.data = re;
-      console.log( this.questions );
+      if(re) this.data = re;
   });
 
   }
     get questions() {
     if ( this.data === void 0 ) return [];
     return Object.keys( this.data );
+  }
+  onClickDelete(id){
+    this.question.delete(id, s=> {
+      let confirmDelete = this.alrtCtrl.create({
+        title:'delete',
+        subTitle:'delete',
+        buttons:[{
+          text:'Ok',
+          handler: ()=>{
+            if(s) alert('Error: ' + s);
+            else{
+              console.log('success: removing question');
+              this.data = {};
+              this.displayQuestions();
+            }
+          }
+        },{
+          text:'Cancel',
+          handler:()=>{
+            alert('Canceled')
+          }
+        }]
+      })
+      confirmDelete.present();
+    })
+
+  }
+  onClickUpdate(id){
+    this.navCtrl.push( QuestionsPage,{
+      questionID: id
+    } );
   }
 
 }
