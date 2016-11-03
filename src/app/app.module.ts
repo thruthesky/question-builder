@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { Login } from '../pages/login/login';
+import { LoginPage } from '../pages/login/login';
 import { UserAuth } from '../providers/user-auth';
-import { Questions } from '../pages/questions/questions';
+import { QuestionsPage } from '../pages/questions/questions';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    Login,
-    Questions
+    LoginPage,
+    QuestionsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -20,8 +20,8 @@ import { Questions } from '../pages/questions/questions';
   entryComponents: [
     MyApp,
     HomePage,
-    Login,
-    Questions
+    LoginPage,
+    QuestionsPage
   ],
   providers: [ UserAuth ]
 })

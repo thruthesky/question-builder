@@ -22,13 +22,14 @@ let postData = {
   selector: 'page-questions',
   templateUrl: 'questions.html'
 })
-export class Questions {
+export class QuestionsPage {
   
   post = postData;
 
   question: Post = new Post();
+  data;
+  constructor(private navCtrl: NavController) {}
 
-  constructor(public navCtrl: NavController) {}
 
   ionViewDidLoad() {
     console.log('Hello Questions Page');
@@ -51,6 +52,9 @@ export class Questions {
         });
 
       }, e => console.log( e ) );
+  }
+  onClickBack(){
+    this.navCtrl.pop();
   }
 
 }
