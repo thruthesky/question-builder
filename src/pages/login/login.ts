@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
 import { UserAuth } from '../../providers/user-auth';
 import { HomePage } from '../home/home';
+import { RegistrationPage } from '../registration-page/registration-page';
+import { PasswordReset } from '../password-reset/password-reset';
 
 /*
   Generated class for the Login page.
@@ -18,7 +20,7 @@ export class LoginPage {
   user:string;
   password:string;
   loading: boolean = false;
-  
+
 
   constructor(
     private navCtrl: NavController,
@@ -38,6 +40,14 @@ export class LoginPage {
     }, error => {
       alert(error.message)
     })
+  }
+
+  onClickSignup(){
+    this.navCtrl.push( RegistrationPage )
+  }
+
+  onClickForgot(){
+    this.navCtrl.push( PasswordReset )
   }
 
 }

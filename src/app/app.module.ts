@@ -5,13 +5,17 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { UserAuth } from '../providers/user-auth';
 import { QuestionsPage } from '../pages/questions/questions';
+import { RegistrationPage } from '../pages/registration-page/registration-page';
+import { PasswordReset } from '../pages/password-reset/password-reset';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     LoginPage,
-    QuestionsPage
+    QuestionsPage,
+    RegistrationPage,
+    PasswordReset
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -21,7 +25,9 @@ import { QuestionsPage } from '../pages/questions/questions';
     MyApp,
     HomePage,
     LoginPage,
-    QuestionsPage
+    QuestionsPage,
+    RegistrationPage,
+    PasswordReset
   ],
   providers: [ UserAuth ]
 })

@@ -96,7 +96,6 @@ export class QuestionsPage {
 
   displayQuestions() {
     this.question.gets( re => {
-      console.log(re);
       if(re) {
         this.data = re;
         if(this.questionID){
