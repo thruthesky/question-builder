@@ -27,4 +27,7 @@ export class UserAuth {
   resetPass( email:string): any {
     return this.userAuth.sendPasswordResetEmail(email);
   }
+  logoutUser(): any {
+    return this.userAuth.signOut();
+  }
 }

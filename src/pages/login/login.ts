@@ -50,4 +50,10 @@ export class LoginPage {
     this.navCtrl.push( PasswordReset )
   }
 
+  onClickLogout(){
+    this.userAuth.logoutUser().then(() => {
+      this.navCtrl.setRoot(LoginPage);
+    });
+  }
+
 }

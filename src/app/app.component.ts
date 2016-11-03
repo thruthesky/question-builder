@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-import { Database } from '../fireframe/database';
+
 import { HomePage } from '../pages/home/home';
 
 @Component({

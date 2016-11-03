@@ -11,14 +11,15 @@ import { Post } from '../../fireframe/post';
 export class HomePage {
   question: Post = new Post();
   data;
+
   constructor(
     private navCtrl: NavController,
-    private alrtCtrl: AlertController
+    private alrtCtrl: AlertController,
+
   ) {
 
   }
   ionViewWillEnter() {
-    console.log('CategoryPage will enter');
     this.displayQuestions();
   }
   onClickAdd(){
@@ -50,22 +51,24 @@ export class HomePage {
   }
 
   onClickDelete(id){
+    this.question.delete( id, s => {
     let confirmDelete = this.alrtCtrl.create({
       title:'delete',
       subTitle:'Are you sure you want to delete this?',
       buttons:[{
-        text:'Ok',
+        text: 'ok',
         handler:()=>{
-          this.onDelete(id);
-        }
-      },{
-        text:'Cancel',
-        handler:()=>{
-          console.log('cancel')
+          if ( s ) alert('Error: ' + s);
+          else {
+            console.log('success: removing from content');
+            this.data = {};
+            this.displayQuestions();
+          }
         }
       }]
     })
     confirmDelete.present();
+    });
   }
 
   onClickLogin(){

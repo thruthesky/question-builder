@@ -7,7 +7,8 @@
 </ion-header>
 
 <ion-content padding>
-  <button ion-button (click)="onClickLogin()">Login</button>
+  <button ion-button (click)="onClickLogin()" *ngIf="!user">Login</button>
+  <button ion-button (click)="onClickLogout()" *ngIf="user">Logout</button>
   <button ion-button (click)="onClickAdd()">Create Questions</button>
 
     <ion-list>
