@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Post } from '../../fireframe/post';
+import { Category } from '../../fireframe/category';
 
 let postData = {
   title: '',
@@ -22,13 +23,32 @@ let postData = {
   selector: 'page-questions',
   templateUrl: 'questions.html'
 })
-export class Questions {
+export class QuestionPage {
   
   post = postData;
+  category: Category;
 
   question: Post = new Post();
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController) {
+    this.category = new Category();
+    this.category.get('questions', s => {
+      if ( s ) {
+        console.log("OK: category exists");
+      }
+      else {
+        // category does not exists.
+        this.category.id('questions').name('Question').title('Question Category').description('...')
+          .create( s => {
+            console.log("OK: category created!");
+          }, e => {
+            alert('Error: failed to create questions category');
+          });
+      }
+    }, e => {
+      alert( 'ERROR: failed to sync' );
+    } );
+  }
 
   ionViewDidLoad() {
     console.log('Hello Questions Page');
@@ -53,4 +73,7 @@ export class Questions {
       }, e => console.log( e ) );
   }
 
+  onClickBack() {
+    this.navCtrl.pop();
+  }
 }

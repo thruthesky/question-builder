@@ -25,7 +25,7 @@
     "@ionic/app-scripts": "0.0.37-5",
     "@ionic/storage": "1.1.6",
     "firebase": "^3.5.3",
-    "ionic-angular": "2.0.0-rc.1",
+    "ionic-angular": "^2.0.0-rc.1-201610241941",
     "ionic-native": "2.2.3",
     "ionicons": "3.0.0",
     "rxjs": "5.0.0-beta.12",

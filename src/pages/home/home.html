@@ -7,8 +7,17 @@
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <h1>Question Builder</h1>
+
+  <button ion-button (click)="onClickLogin()">LOGIN</button>
+  <button ion-button (click)="onClickQuestion()">Create Question</button>
+
+
+  <ion-list>
+    <ion-item *ngFor= " let key of postKeys ">
+      {{ this.posts[ key ].title }}
+      <button ion-button (click)="onClickDelete( key )">DELETE</button>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

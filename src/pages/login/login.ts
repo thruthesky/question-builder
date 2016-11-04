@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import * as firebase from 'firebase';
+//import * as firebase from 'firebase';
 import { UserAuth } from '../../providers/user-auth';
 import { HomePage } from '../home/home';
 
@@ -14,7 +14,7 @@ import { HomePage } from '../home/home';
   selector: 'page-login',
   templateUrl: 'login.html'
 })
-export class Login {
+export class LoginPage {
   user:string;
   password:string;
   loading: boolean = false;
