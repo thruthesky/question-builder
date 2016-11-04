@@ -14,7 +14,7 @@
 
 
 <ion-content padding>
-      <ion-list>
+  <ion-list>
       <ion-item>
         <ion-label primary stacked>User ID</ion-label>
         <ion-input [(ngModel)]="user" type="email"></ion-input>
@@ -32,5 +32,6 @@
   </ion-list>
    <button ion-button block outline (click)="onClickLogin()">Login</button>
    <button ion-button (click)="onClickSignup()">Register</button>
+   <button outline ion-button (click)="onClickForgot()">Forgot Password</button>
 
 </ion-content>

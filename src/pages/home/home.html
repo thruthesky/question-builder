@@ -1,12 +1,13 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Dashboard
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+<<<<<<< HEAD
   <h1>Question Builder</h1>
 
   <button ion-button (click)="onClickLogin()">LOGIN</button>
@@ -20,4 +21,25 @@
     </ion-item>
   </ion-list>
 
+=======
+  <button ion-button (click)="onClickLogin()" *ngIf="!user">Login</button>
+  <button ion-button (click)="onClickLogout()" *ngIf="user">Logout</button>
+  <button ion-button (click)="onClickAdd()">Create Questions</button>
+
+    <ion-list>
+
+   <ion-item-sliding *ngFor="let id of questions">
+
+    <ion-item>
+    {{ data[id].title }}
+    </ion-item>
+
+    <ion-item-options>
+      <button ion-button color="secondary" (click)="onClickUpdate(id)"> Edit</button>
+      <button ion-button color="danger" (click)="onClickDelete(id)">Delete</button>
+    </ion-item-options>
+  </ion-item-sliding>
+
+  </ion-list>
+>>>>>>> 84c5ca91354f46c07db6d2b43dca92355baa9352
 </ion-content>

@@ -24,7 +24,10 @@ export class UserAuth {
   return this.userAuth.createUserWithEmailAndPassword(email, password);
   }
 
-  resetPass( email:string, password:string ): any {
+  resetPass( email:string): any {
     return this.userAuth.sendPasswordResetEmail(email);
+  }
+  logoutUser(): any {
+    return this.userAuth.signOut();
   }
 }
