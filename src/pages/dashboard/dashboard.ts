@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { QuestionformPage } from '../questionform/questionform';
 import {Post} from "../../fireframe2/post";
+import { AngularFire } from 'angularfire2';
+
 
 /*
   Generated class for the Dashboard page.
@@ -19,10 +21,21 @@ export class DashboardPage {
   contents;
   constructor(
     private navCtrl: NavController,
-    private question: Post
+    private question: Post,
+    public af: AngularFire
 
   ) {
+    this.checkUser();
+  }
 
+
+    checkUser(){
+    this.af.auth.subscribe(auth =>{
+      if(auth){
+        console.log(auth)
+      }
+      else this.navCtrl.pop();
+    });
   }
 
   ionViewWillEnter() {

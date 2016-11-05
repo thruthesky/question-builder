@@ -12,7 +12,7 @@
 </ion-header>
 
 <ion-content padding>
-  <div [ngSwitch]="authentication">
+  <div [ngSwitch]="authentication" >
     <div *ngSwitchCase="'login'">
       <h3>Login</h3>
       <ion-list>
@@ -42,4 +42,6 @@
       <button ion-button small (click)="onClickRegister()">Register</button>
     </div>
   </div>
+
+  <button (click)="onClickTest()">test</button>
 </ion-content>

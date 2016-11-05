@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { DashboardPage } from '../dashboard/dashboard';
-import {User} from "../../fireframe2/user";
+import { User } from "../../fireframe2/user";
+import { AngularFire } from 'angularfire2';
 
 @Component({
   selector: 'page-home',
@@ -18,12 +19,29 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
-    private user: User
+    private user: User,
+    public af: AngularFire
   ) {
+    this.checkUser();
+  }
+
+  checkUser(){
+    this.af.auth.subscribe(auth =>{
+      if(auth){
+        this.navCtrl.setRoot( DashboardPage );
+      }
+      else console.log(auth)
+    });
+  }
+
+  onClickTest(){
 
   }
+  ionViewWillEnter(){
+    // this.checkUser();
+  }
   ionViewDidLoad(){
-    this.navCtrl.push( DashboardPage )
+   
   }
   onClickLogin(){
     this.user
@@ -31,6 +49,7 @@ export class HomePage {
       .set('password', this.loginUserPass)
       .login( re => {
         console.log(re)
+        this.checkUser();
       }, e => {
         console.log(e)
       });
