@@ -70,7 +70,6 @@ export class DashboardPage {
    this.userAuth.logout()
   //  this.navCtrl.setRoot( HomePage );
   }
-
   get questions() {
     if ( this.contents === void 0 ) return [];
     return Object.keys( this.contents );
