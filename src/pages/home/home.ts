@@ -25,6 +25,9 @@ export class HomePage {
     this.checkUser();
   }
 
+
+// observable
+//  checks anfularfire auth if user is logged in.
   checkUser(){
     this.af.auth.subscribe(auth =>{
       if(auth){
