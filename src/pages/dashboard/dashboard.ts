@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { QuestionformPage } from '../questionform/questionform';
 import {Post} from "../../fireframe2/post";
-import { AngularFire } from 'angularfire2';
+import { HomePage } from '../home/home';
+import { AngularFire, FirebaseAuth } from 'angularfire2';
 
 
 /*
@@ -16,6 +17,8 @@ import { AngularFire } from 'angularfire2';
   templateUrl: 'dashboard.html'
 })
 export class DashboardPage {
+
+  userAuth:FirebaseAuth;
   more = [];
   questionID
   contents;
@@ -25,6 +28,7 @@ export class DashboardPage {
     public af: AngularFire
 
   ) {
+    this.userAuth = af.auth
     this.checkUser();
   }
 
@@ -34,7 +38,7 @@ export class DashboardPage {
       if(auth){
         console.log(auth)
       }
-      else this.navCtrl.pop();
+      else this.navCtrl.setRoot( HomePage );
     });
   }
 
@@ -58,6 +62,13 @@ export class DashboardPage {
       console.log(e)
     });
 
+  }
+  logOut(){
+    return 
+  }
+  onClickLogout(){
+   this.userAuth.logout()
+  //  this.navCtrl.setRoot( HomePage );
   }
 
   get questions() {

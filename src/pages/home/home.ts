@@ -52,7 +52,7 @@ export class HomePage {
       .set('password', this.loginUserPass)
       .login( re => {
         console.log(re)
-        this.checkUser();
+        
       }, e => {
         console.log(e)
       });
