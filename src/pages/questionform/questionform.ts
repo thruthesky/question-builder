@@ -38,9 +38,7 @@ export class QuestionformPage {
       .set( 'name', 'questions' )
       .set( 'title', 'Questions' )
       .set( 'description', 'questions for quiz app' )
-      .create( s => {
-
-        console.log(s)
+      .create( () => {
       }, e => {
 
         console.log(e)
@@ -50,8 +48,8 @@ export class QuestionformPage {
   onClickCreate(){
     this.questionPost
       .sets(this.question)
-      .create( s => {
-        console.log(s)
+      .create( () => {
+      
         this.onClickReset()
       }, e => {
         console.log(e)
@@ -93,8 +91,8 @@ export class QuestionformPage {
       .set( 'choice3', this.question.choice3 )
       .set( 'choice4', this.question.choice4 )
       .set( 'answer', this.question.answer )
-      .update(s => {
-        console.log(s)
+      .update( () => {
+    
         this.onClickBack();
       },e=>{
         console.log(e)

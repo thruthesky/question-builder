@@ -1,47 +1,18 @@
+<!--
+  Generated template for the Home page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
 <ion-header>
-  <ion-toolbar>
-    <ion-segment [(ngModel)]="authentication">
-      <ion-segment-button value="login">
-        <ion-icon name="person"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button value="register">
-        <ion-icon name="person-add"></ion-icon>
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
+
+  <ion-navbar>
+    <ion-title>home</ion-title>
+  </ion-navbar>
+
 </ion-header>
 
-<ion-content padding>
-  <div [ngSwitch]="authentication" >
-    <div *ngSwitchCase="'login'">
-      <h3>Login</h3>
-      <ion-list>
-        <ion-item>
-          <ion-label fixed>Email</ion-label>
-          <ion-input [(ngModel)]="loginUserMail"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label fixed>Password</ion-label>
-          <ion-input [(ngModel)]="loginUserPass"></ion-input>
-        </ion-item>
-      </ion-list>
-      <button ion-button small (click)="onClickLogin()">Login</button>
-    </div>
-    <div *ngSwitchCase="'register'">
-      <h3>Register</h3>
-      <ion-list>
-        <ion-item>
-          <ion-label fixed>Email</ion-label>
-          <ion-input [(ngModel)]="regUserMail"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label fixed>Password</ion-label>
-          <ion-input [(ngModel)]="regUserPass"></ion-input>
-        </ion-item>
-      </ion-list>
-      <button ion-button small (click)="onClickRegister()">Register</button>
-    </div>
-  </div>
 
-  <!--<button (click)="onClickTest()">test</button>-->
+<ion-content padding>
+  <ion-spinner></ion-spinner> Please wait...
 </ion-content>

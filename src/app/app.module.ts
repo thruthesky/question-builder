@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { LoginPage }from '../pages/login/login';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { QuestionformPage } from '../pages/questionform/questionform';
 import { FireModule } from '../fireframe2/fire-module';
@@ -11,6 +12,7 @@ import { FireModule } from '../fireframe2/fire-module';
     MyApp,
     HomePage,
     DashboardPage,
+    LoginPage,
     QuestionformPage
   ],
   imports: [
@@ -22,6 +24,7 @@ import { FireModule } from '../fireframe2/fire-module';
     MyApp,
     HomePage,
     DashboardPage,
+    LoginPage,
     QuestionformPage
   ],
   providers: []

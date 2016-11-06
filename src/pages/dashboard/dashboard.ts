@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { QuestionformPage } from '../questionform/questionform';
 import {Post} from "../../fireframe2/post";
-import { HomePage } from '../home/home';
+
+import { LoginPage } from '../login/login';
 import { AngularFire, FirebaseAuth } from 'angularfire2';
 
 
@@ -38,7 +39,7 @@ export class DashboardPage {
       if(auth){
         console.log(auth)
       }
-      else this.navCtrl.setRoot( HomePage );
+      else this.navCtrl.setRoot( LoginPage );
     });
   }
 
