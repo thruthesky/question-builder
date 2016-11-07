@@ -31,16 +31,16 @@
         </button>
         <div *ngIf="more[id]">
           <ion-card>
-            <div (click)="onClickChoice(ansTest=1)">
+            <div (click)="onClickChoice(ansTest=1,contents[id].answer)">
               Choice1: {{ contents[id].choice1 }}
             </div>
-            <div (click)="onClickChoice(ansTest=2)">
+            <div (click)="onClickChoice(ansTest=2,contents[id].answer)">
               Choice2: {{ contents[id].choice2 }}
             </div>
-            <div (click)="onClickChoice(ansTest=3)"> 
+            <div (click)="onClickChoice(ansTest=3,contents[id].answer)">
               Choice3: {{ contents[id].choice3 }}
             </div>
-            <div(click)="onClickChoice(ansTest=4)">
+            <div (click)="onClickChoice(ansTest=4,contents[id].answer)">
               Choice4: {{ contents[id].choice4 }}
             </div>
             <div>

@@ -85,8 +85,10 @@ export class DashboardPage {
     });
 
   }
-  onClickChoice(ansTest){
+  onClickChoice(ansTest, answer){
     console.log(ansTest);
+    if( ansTest == answer)console.log('correct');
+    else console.log('incorrect');
   }
 
   onClickLogout(){
