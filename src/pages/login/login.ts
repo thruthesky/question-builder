@@ -76,39 +76,39 @@ export class LoginPage {
   }
   onClickRegister(){
     this.user
-      .sets(this.userData)
-      .create( () => {
-          this.user.sets(this.userData).login( userData => {
-              console.log('login ok: Data from Stroage: ', userData);
-              this.userData.uid = userData.uid;
-              console.log("RegisterPage::onClickRegister() login OK: this.data: ", this.userData);
-              this.user.sets(this.userData).update( () => {
-                  console.log('User update success');
-                  let regToast = this.toastCtrl.create({
-                    message: 'User registration success.',
-                    duration: 1500
-                  })
-                  regToast.present();
-              }, e => {
-                  let regToast = this.toastCtrl.create({
-                    message: e,
-                    duration: 1500
-                  })
-                  regToast.present();
-              })
-          }, e => {
-                  let regToast = this.toastCtrl.create({
-                    message: e,
-                    duration: 1500
-                    })
-                  regToast.present();
+     .sets(this.userData)
+     .create( () => {
+        this.user.sets(this.userData).login( userData => {
+            console.log('login ok: Data from Stroage: ', userData);
+            this.userData.uid = userData.uid;
+            console.log("RegisterPage::onClickRegister() login OK: this.data: ", this.userData);
+            this.user.sets(this.userData).update( () => {
+                console.log('User update success');
+                let regToast = this.toastCtrl.create({
+                  message: 'User registration success.',
+                  duration: 1500
+                })
+                regToast.present();
+            }, e => {
+                let regToast = this.toastCtrl.create({
+                  message: e,
+                  duration: 1500
+                })
+                regToast.present();
             })
         }, e => {
-                  let regToast = this.toastCtrl.create({
-                    message: e,
-                    duration: 1500
+                let regToast = this.toastCtrl.create({
+                  message: e,
+                  duration: 1500
                   })
-                  regToast.present();
+                regToast.present();
+          })
+      }, e => {
+                let regToast = this.toastCtrl.create({
+                  message: e,
+                  duration: 1500
+                })
+                regToast.present();
       });
   }
 }

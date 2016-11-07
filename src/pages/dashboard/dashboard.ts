@@ -31,6 +31,7 @@ export class DashboardPage {
   more = [];
   questionID
   contents;
+  choice
   constructor(
     private navCtrl: NavController,
     private question: Post,
@@ -75,15 +76,19 @@ export class DashboardPage {
 
   displayQuestions() {
     this.question.gets( re => {
-      if(re) this.contents = re;
+      if(re){
+        this.contents = re;
+        console.log(JSON.stringify(re));
+    } 
     },e =>{
       console.log(e)
     });
 
   }
-  logOut(){
-    return 
+  onClickChoice(ansTest){
+    console.log(ansTest);
   }
+
   onClickLogout(){
    this.userAuth.logout()
   //  this.navCtrl.setRoot( HomePage );
