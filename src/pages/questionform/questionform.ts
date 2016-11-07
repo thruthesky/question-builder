@@ -26,6 +26,27 @@ export class QuestionformPage {
   ) {
     this.questionID = this.navPar.get('questionID');
     console.log('question ID', this.questionID);
+
+
+
+/*
+    for ( let i = 0; i < 1000; i ++ ) {
+      this.questionPost
+        .set('question', 'Question No. ' + i )
+        .set('choice1', 'choice a. ' + i)
+        .set('choice2', 'choice b. ' + i)
+        .set('choice3', 'choice c. ' + i)
+        .set('choice4', 'choice d. ' + i)
+        .set('answer', 'answer. ' + i)
+        .create( () => {
+          console.log('question: ' + i + ' created !!');
+        }, e => {
+          console.log(e)
+        })
+    }
+    */
+
+
   }
 
   ionViewWillEnter() {
@@ -72,22 +93,28 @@ export class QuestionformPage {
     return Object.keys( this.contents );
   }
 
+  validateForm() {
+    if ( this.question.answer == '' ) {
+      this.track = { error: 'Input answer' };
+      return false;
+    }
+    return true;
+  }
   onClickCreate(){
+    this.validateForm();
+    this.track = { progress: 'Updating ...' };
     this.questionPost
       .sets(this.question)
       .create( () => {
         this.onClickReset()
+        this.track = { success: 'Update success!' };
       }, e => {
         console.log(e)
+        this.track = { error: e };
       });
   }
   onClickUpdate() {
-
-    if ( this.question.answer == '' ) {
-      this.track = { error: 'Input answer' };
-      return;
-    }
-
+    if ( this.validateForm() == false ) return;
     this.track = { progress: 'Updating ...' };
     this.questionPost
       .set( 'key', this.questionID )
@@ -102,7 +129,7 @@ export class QuestionformPage {
         this.track = { success: 'Update success!' };
       },e=>{
         console.log(e)
-        this.track = { error: 'Update error...'};
+        this.track = { error: e };
       })
   }
 

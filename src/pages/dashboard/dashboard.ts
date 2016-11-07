@@ -4,8 +4,8 @@ import { QuestionformPage } from '../questionform/questionform';
 import {Post} from "../../fireframe2/post";
 import { User, USER_DATA } from '../../fireframe2/user';
 
-import { LoginPage } from '../login/login';
-import { AngularFire, FirebaseAuth } from 'angularfire2';
+//import { LoginPage } from '../login/login';
+//import { AngularFire, FirebaseAuth } from 'angularfire2';
 
 
 interface userMeta extends USER_DATA {
@@ -26,7 +26,6 @@ interface userMeta extends USER_DATA {
 export class DashboardPage {
   userName;
   userData = <userMeta> {};
-  userAuth:FirebaseAuth;
   uid;
   more = [];
   questionID
@@ -35,36 +34,33 @@ export class DashboardPage {
   constructor(
     private navCtrl: NavController,
     private question: Post,
-    private user: User,
-    public af: AngularFire
+    private user: User
 
   ) {
-    this.userAuth = af.auth
-    this.checkUser();
+//    this.checkUser();
 //this.navCtrl.setRoot( QuestionformPage, { questionID: '-KVzAiWzLy-MvgW3QWdt' } );
     
   }
 
     checkUser(){
-    this.af.auth.subscribe(auth =>{
-      if(auth){
-        console.log(auth)
-        this.uid = auth.uid;
+      this.user.loggedIn( (userData) => {
+        this.uid = userData.uid;
         this.user.set('key', this.uid).get( user =>{
           this.userName = user.displayName;
         }, e=>{})
-      }
-      else this.navCtrl.setRoot( LoginPage );
-    });
+      }, e => alert('Login : ' + e ) );
+
   }
 
   ionViewWillEnter() {
+    //console.log('ionViewWillEnter()');
     this.displayQuestions();
   }
 
   testResign(){
     this.user.resign( s=>{console.log(s)}, e=>console.error(e) )
   }
+
 
   onClickAdd(){
     this.navCtrl.push( QuestionformPage );
@@ -77,12 +73,12 @@ export class DashboardPage {
 
   displayQuestions() {
     this.question.gets( re => {
-      if(re){
+      if ( re ) {
         this.contents = re;
         console.log(JSON.stringify(re));
-    } 
-    },e =>{
-      console.log(e)
+      } 
+    }, e => {
+      console.log(e);
     });
 
   }
@@ -93,7 +89,7 @@ export class DashboardPage {
   }
 
   onClickLogout(){
-   this.userAuth.logout()
+   //this.userAuth.logout()
   //  this.navCtrl.setRoot( HomePage );
   }
   get questions() {

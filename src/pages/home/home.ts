@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { DashboardPage } from '../dashboard/dashboard';
 import { LoginPage } from '../login/login'
-import { AngularFire } from 'angularfire2';
+import { User } from '../../fireframe2/user';
 
 /*
   Generated class for the Home page.
@@ -18,14 +18,12 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
-    public af: AngularFire
+    public user: User
     ) {
-          this.af.auth.subscribe(auth =>{
-      if(auth){
+      this.user.loggedIn( (userData) => {
+        console.log('HomePage::constructor() user.loggedIn() : yes : userData : ', userData);
         this.navCtrl.setRoot( DashboardPage );
-      }
-      else this.navCtrl.setRoot( LoginPage );
-    });
+      }, e => alert( e ) );
     }
 
   ionViewDidLoad() {
