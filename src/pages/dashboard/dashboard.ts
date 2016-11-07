@@ -2,10 +2,16 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { QuestionformPage } from '../questionform/questionform';
 import {Post} from "../../fireframe2/post";
+import { User, USER_DATA } from '../../fireframe2/user';
 
 import { LoginPage } from '../login/login';
 import { AngularFire, FirebaseAuth } from 'angularfire2';
 
+
+interface userMeta extends USER_DATA {
+  displayName:string;
+  age:string;
+}
 
 /*
   Generated class for the Dashboard page.
@@ -18,19 +24,23 @@ import { AngularFire, FirebaseAuth } from 'angularfire2';
   templateUrl: 'dashboard.html'
 })
 export class DashboardPage {
-
+  userName:string;
+  userData = <userMeta> {};
   userAuth:FirebaseAuth;
+  uid;
   more = [];
   questionID
   contents;
   constructor(
     private navCtrl: NavController,
     private question: Post,
+    private user: User,
     public af: AngularFire
 
   ) {
     this.userAuth = af.auth
     this.checkUser();
+    
   }
 
 
@@ -38,6 +48,11 @@ export class DashboardPage {
     this.af.auth.subscribe(auth =>{
       if(auth){
         console.log(auth)
+        this.uid = auth.uid;
+        this.user.get(this.uid, s =>{
+          JSON.stringify(s)
+          this.userName = s.displayName;
+        }, e=>{})
       }
       else this.navCtrl.setRoot( LoginPage );
     });
@@ -75,7 +90,6 @@ export class DashboardPage {
     if ( this.contents === void 0 ) return [];
     return Object.keys( this.contents );
   }
-
   onClickUpdate(id){
     this.navCtrl.push( QuestionformPage, {
       questionID: id
@@ -87,11 +101,9 @@ export class DashboardPage {
       if ( s ) alert('Error: ' + s);
       else {
         console.log('success: removing from content');
-        this.displayQuestions();
         this.contents = {};
-
+        this.displayQuestions();
       }
-
     }, e => {
       alert('Error: ' + e);
     });

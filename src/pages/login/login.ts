@@ -5,7 +5,7 @@ import { User, USER_DATA } from "../../fireframe2/user";
 import { AngularFire } from 'angularfire2';
 
 interface userMeta extends USER_DATA {
-  name:string;
+  displayName:string;
   age:string;
 }
 
