@@ -43,7 +43,6 @@ export class DashboardPage {
     
   }
 
-
     checkUser(){
     this.af.auth.subscribe(auth =>{
       if(auth){
@@ -60,6 +59,12 @@ export class DashboardPage {
 
   ionViewWillEnter() {
     this.displayQuestions();
+  }
+
+  testResign(){
+    this.af.auth.subscribe(user =>{
+      user.auth.delete().then(()=>console.log('success'),e=>console.error(e));
+    })
   }
 
   onClickAdd(){

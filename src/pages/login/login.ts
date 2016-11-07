@@ -38,15 +38,20 @@ export class LoginPage {
 //  checks anfularfire auth if user is logged in.
   checkUser(){
     this.af.auth.subscribe(auth =>{
-      if(auth){
-        this.navCtrl.setRoot( DashboardPage );
-      }
+      if(auth) this.navCtrl.setRoot( DashboardPage );
+      
       else console.log(auth)
     });
   }
 
   onClickTest(){
 
+  }
+
+  onClickReset(){
+    this.userData.email = undefined;
+    this.userData.password = undefined;
+    this.userData.displayName = undefined;
   }
   ionViewWillEnter(){
     // this.checkUser();
