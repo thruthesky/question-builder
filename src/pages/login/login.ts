@@ -65,7 +65,6 @@ export class LoginPage {
       .set('password', this.loginUserPass)
       .login( re => {
         console.log(re)
-        
       }, e => {
         console.log(e)
         let failToast = this.toastCtrl.create({

@@ -24,7 +24,7 @@ interface userMeta extends USER_DATA {
   templateUrl: 'dashboard.html'
 })
 export class DashboardPage {
-  userName:string;
+  userName;
   userData = <userMeta> {};
   userAuth:FirebaseAuth;
   uid;
@@ -48,9 +48,8 @@ export class DashboardPage {
       if(auth){
         console.log(auth)
         this.uid = auth.uid;
-        this.user.get(this.uid, s =>{
-          JSON.stringify(s)
-          this.userName = s.displayName;
+        this.user.get(this.uid, user =>{
+          this.userName = user.displayName;
         }, e=>{})
       }
       else this.navCtrl.setRoot( LoginPage );
@@ -62,9 +61,7 @@ export class DashboardPage {
   }
 
   testResign(){
-    this.af.auth.subscribe(user =>{
-      user.auth.delete().then(()=>console.log('success'),e=>console.error(e));
-    })
+    this.user.resign( s=>{console.log(s)}, e=>console.error(e) )
   }
 
   onClickAdd(){
