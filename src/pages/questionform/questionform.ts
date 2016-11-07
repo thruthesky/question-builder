@@ -17,6 +17,7 @@ export class QuestionformPage {
   questionID
   contents;
   question = questionData;
+  track;
   constructor(
     private navCtrl: NavController,
     private category: Category,
@@ -24,6 +25,7 @@ export class QuestionformPage {
     private navPar: NavParams
   ) {
     this.questionID = this.navPar.get('questionID');
+    console.log('question ID', this.questionID);
   }
 
   ionViewWillEnter() {
@@ -45,16 +47,6 @@ export class QuestionformPage {
       });
   }
 
-  onClickCreate(){
-    this.questionPost
-      .sets(this.question)
-      .create( () => {
-      
-        this.onClickReset()
-      }, e => {
-        console.log(e)
-      });
-  }
   onClickReset(){
     this.question.question = '';
     this.question.choice1 = '';
@@ -65,15 +57,13 @@ export class QuestionformPage {
   }
 
   displayQuestions() {
-    this.questionPost.gets( re => {
-      if(re) this.contents = re;
-      if(this.questionID){
-        console.log(this.contents[this.questionID].question)
-        this.question = this.contents[this.questionID]
-      }
-    },e =>{
-      console.log(e)
-    });
+    if ( this.questionID ) {
+      this.questionPost
+        .set('key', this.questionID )
+        .get( re => {
+          this.question = re;
+        }, e => alert(e) );
+    }
 
   }
 
@@ -82,7 +72,23 @@ export class QuestionformPage {
     return Object.keys( this.contents );
   }
 
-  onClickUpdate(){
+  onClickCreate(){
+    this.questionPost
+      .sets(this.question)
+      .create( () => {
+        this.onClickReset()
+      }, e => {
+        console.log(e)
+      });
+  }
+  onClickUpdate() {
+
+    if ( this.question.answer == '' ) {
+      this.track = { error: 'Input answer' };
+      return;
+    }
+
+    this.track = { progress: 'Updating ...' };
     this.questionPost
       .set( 'key', this.questionID )
       .set( 'question', this.question.question )
@@ -92,14 +98,16 @@ export class QuestionformPage {
       .set( 'choice4', this.question.choice4 )
       .set( 'answer', this.question.answer )
       .update( () => {
-    
-        this.onClickBack();
+        // this.onClickBack();
+        this.track = { success: 'Update success!' };
       },e=>{
         console.log(e)
+        this.track = { error: 'Update error...'};
       })
   }
 
   onClickBack(){
     this.navCtrl.pop();
   }
+
 }

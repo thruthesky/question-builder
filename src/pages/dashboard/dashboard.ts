@@ -41,6 +41,7 @@ export class DashboardPage {
   ) {
     this.userAuth = af.auth
     this.checkUser();
+//this.navCtrl.setRoot( QuestionformPage, { questionID: '-KVzAiWzLy-MvgW3QWdt' } );
     
   }
 
@@ -49,7 +50,7 @@ export class DashboardPage {
       if(auth){
         console.log(auth)
         this.uid = auth.uid;
-        this.user.get(this.uid, user =>{
+        this.user.set('key', this.uid).get( user =>{
           this.userName = user.displayName;
         }, e=>{})
       }

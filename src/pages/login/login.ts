@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 import { DashboardPage } from '../dashboard/dashboard';
 import { User, USER_DATA } from "../../fireframe2/user";
-import { AngularFire } from 'angularfire2';
 
 interface userMeta extends USER_DATA {
   displayName:string;
@@ -27,7 +26,6 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     private user: User,
-    public af: AngularFire,
     private toastCtrl: ToastController
   ) {
     this.checkUser();
@@ -36,12 +34,10 @@ export class LoginPage {
 
 // observable
 //  checks anfularfire auth if user is logged in.
-  checkUser(){
-    this.af.auth.subscribe(auth =>{
-      if(auth) this.navCtrl.setRoot( DashboardPage );
-      
-      else console.log(auth)
-    });
+  checkUser() {
+    this.user.loggedIn( (userData) => {
+      this.navCtrl.setRoot( DashboardPage );
+    }, e => alert( e ) );
   }
 
   onClickTest(){
@@ -77,38 +73,11 @@ export class LoginPage {
   onClickRegister(){
     this.user
      .sets(this.userData)
-     .create( () => {
-        this.user.sets(this.userData).login( userData => {
-            console.log('login ok: Data from Stroage: ', userData);
-            this.userData.uid = userData.uid;
-            console.log("RegisterPage::onClickRegister() login OK: this.data: ", this.userData);
-            this.user.sets(this.userData).update( () => {
-                console.log('User update success');
-                let regToast = this.toastCtrl.create({
-                  message: 'User registration success.',
-                  duration: 1500
-                })
-                regToast.present();
-            }, e => {
-                let regToast = this.toastCtrl.create({
-                  message: e,
-                  duration: 1500
-                })
-                regToast.present();
-            })
-        }, e => {
-                let regToast = this.toastCtrl.create({
-                  message: e,
-                  duration: 1500
-                  })
-                regToast.present();
-          })
-      }, e => {
-                let regToast = this.toastCtrl.create({
-                  message: e,
-                  duration: 1500
-                })
-                regToast.present();
-      });
+     .register(
+        ( ) => this.alert('User registration success'),
+        (e) => this.alert(e) );
+  }
+  alert(e) {
+    this.toastCtrl.create({ message: e, duration: 1500 }).present();
   }
 }
