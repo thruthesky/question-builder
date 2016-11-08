@@ -23,7 +23,7 @@ export class HomePage {
       this.user.loggedIn( (userData) => {
         console.log('HomePage::constructor() user.loggedIn() : yes : userData : ', userData);
         this.navCtrl.setRoot( DashboardPage );
-      }, e => alert( e ) );
+      }, e => this.navCtrl.setRoot( LoginPage ) );
     }
 
   ionViewDidLoad() {

@@ -50,7 +50,12 @@
 
     <ion-item>
       <ion-label fixed>Answer</ion-label>
-      <ion-input [(ngModel)]="question.answer"></ion-input>
+        <ion-select [(ngModel)]="question.answer">
+          <ion-option value=1>{{ question.choice1 }}</ion-option>
+          <ion-option value=2>{{ question.choice2 }}</ion-option>
+          <ion-option value=3>{{ question.choice3 }}</ion-option>
+          <ion-option value=4>{{ question.choice4 }}</ion-option>
+      </ion-select>
     </ion-item>
   </ion-list>
 

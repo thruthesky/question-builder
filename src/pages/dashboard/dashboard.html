@@ -23,9 +23,9 @@
 
   <ion-list>
     <ion-item-sliding *ngFor="let id of questions" (ionDrag)="onSlideItem(id)">
-      <ion-item>
+      <ion-item (click)="more[id] = ! more[id]">
        Question:  {{ contents[id].question }}
-        <button icon-only (click)="more[id] = ! more[id]" small>
+        <button icon-only small>
           <ion-icon name="arrow-down" small *ngIf="!more[id]"></ion-icon>
           <ion-icon name="arrow-up" small *ngIf="more[id]"></ion-icon>
         </button>
@@ -58,6 +58,11 @@
      
     </ion-item-sliding>
   </ion-list>
+
+  <div padding block>
+    <button ion-button outline small>1</button>
+    <button ion-button outline small>2</button>
+  </div>
 
    <button (click)="testResign()">resign</button>
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { QuestionformPage } from '../questionform/questionform';
+import { LoginPage } from '../login/login';
 import {Post} from "../../fireframe2/post";
 import { User, USER_DATA } from '../../fireframe2/user';
 
@@ -37,9 +38,12 @@ export class DashboardPage {
     private user: User
 
   ) {
-//    this.checkUser();
-//this.navCtrl.setRoot( QuestionformPage, { questionID: '-KVzAiWzLy-MvgW3QWdt' } );
-    
+      // this.question.destroy( () => {
+           
+           
+      //   }, e => {
+      //      console.log('error:' + e)
+      //   });
   }
 
     checkUser(){
@@ -55,13 +59,13 @@ export class DashboardPage {
   ionViewWillEnter() {
     //console.log('ionViewWillEnter()');
     this.displayQuestions();
+    this.checkUser();
   }
 
   testResign(){
     this.user.resign( s=>{console.log(s)}, e=>console.error(e) )
   }
-
-
+  
   onClickAdd(){
     this.navCtrl.push( QuestionformPage );
   }
@@ -72,10 +76,12 @@ export class DashboardPage {
   }
 
   displayQuestions() {
+    this.question.path = 'question';
     this.question.gets( re => {
       if ( re ) {
         this.contents = re;
-        console.log(JSON.stringify(re));
+        // console.log(JSON.stringify(re));
+                    
       } 
     }, e => {
       console.log(e);
@@ -89,8 +95,10 @@ export class DashboardPage {
   }
 
   onClickLogout(){
-   //this.userAuth.logout()
-  //  this.navCtrl.setRoot( HomePage );
+    this.user.logout( () => {
+      this.userData = null
+      this.navCtrl.setRoot( LoginPage )
+  } );
   }
   get questions() {
     if ( this.contents === void 0 ) return [];
@@ -101,9 +109,10 @@ export class DashboardPage {
       questionID: id
     })
   }
-
-  onClickDelete(id){
-    this.question.delete( id, s => {
+  
+  onClickDelete(key){
+    this.question.set('key', key);
+    this.question.delete( key, s => {
       if ( s ) alert('Error: ' + s);
       else {
         console.log('success: removing from content');

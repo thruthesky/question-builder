@@ -27,24 +27,22 @@ export class QuestionformPage {
     this.questionID = this.navPar.get('questionID');
     console.log('question ID', this.questionID);
 
-
-
-/*
-    for ( let i = 0; i < 1000; i ++ ) {
-      this.questionPost
-        .set('question', 'Question No. ' + i )
-        .set('choice1', 'choice a. ' + i)
-        .set('choice2', 'choice b. ' + i)
-        .set('choice3', 'choice c. ' + i)
-        .set('choice4', 'choice d. ' + i)
-        .set('answer', 'answer. ' + i)
-        .create( () => {
-          console.log('question: ' + i + ' created !!');
-        }, e => {
-          console.log(e)
-        })
-    }
-    */
+    // for ( let i = 0; i < 11; i ++ ) {
+    //   this.questionPost.path = 'question';
+    //   this.questionPost
+    //     .set('question', 'Question No. ' + i )
+    //     .set('choice1', 'choice a. ' + i)
+    //     .set('choice2', 'choice b. ' + i)
+    //     .set('choice3', 'choice c. ' + i)
+    //     .set('choice4', 'choice d. ' + i)
+    //     .set('answer', 'answer. ' + i)
+    //     .create( () => {
+    //       console.log('question: ' + i + ' created !!');
+    //     }, e => {
+    //       console.log(e)
+    //     })
+    // }
+    
 
 
   }
@@ -79,6 +77,7 @@ export class QuestionformPage {
 
   displayQuestions() {
     if ( this.questionID ) {
+      this.questionPost.path = 'question';
       this.questionPost
         .set('key', this.questionID )
         .get( re => {
@@ -116,6 +115,7 @@ export class QuestionformPage {
   onClickUpdate() {
     if ( this.validateForm() == false ) return;
     this.track = { progress: 'Updating ...' };
+    this.questionPost.path = 'question';
     this.questionPost
       .set( 'key', this.questionID )
       .set( 'question', this.question.question )

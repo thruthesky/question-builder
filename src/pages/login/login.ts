@@ -37,7 +37,7 @@ export class LoginPage {
   checkUser() {
     this.user.loggedIn( (userData) => {
       this.navCtrl.setRoot( DashboardPage );
-    }, e => alert( e ) );
+    }, e => console.error( e ) );
   }
 
   onClickTest(){
@@ -60,7 +60,7 @@ export class LoginPage {
       .set('email', this.loginUserMail)
       .set('password', this.loginUserPass)
       .login( re => {
-        console.log(re)
+        this.navCtrl.setRoot( DashboardPage );
       }, e => {
         console.log(e)
         let failToast = this.toastCtrl.create({
