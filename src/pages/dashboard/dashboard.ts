@@ -25,6 +25,7 @@ interface userMeta extends USER_DATA {
   templateUrl: 'dashboard.html'
 })
 export class DashboardPage {
+  searchBar:string = '';
   lastDisplayedKey: string = '';
   userName;
   userData = <userMeta> {};
@@ -61,13 +62,20 @@ export class DashboardPage {
         });
   }
 
-  getItems(ev, id) {
+  getItems(ev) {
+     if(this.searchBar == ''){
+      this.getQuestions();
+      return;
+    }
     let val = ev.target.value;
     if (val && val.trim() != '') {
       this.questions = this.questions.filter( res => {
         return ( res.value.question.toLowerCase().indexOf(val.toLowerCase()) > -1 );
       }, e=>{console.log('error')})
     }
+
+   
+
   }
 
 
@@ -91,19 +99,15 @@ export class DashboardPage {
   }
 
   displayQuestions(data?) {
-    // save last key
     this.lastDisplayedKey = Object.keys(data).shift();
     Object.keys(data).push();
-    //reversing retrieve data
 
     console.log(this.questions);
     let lastData =[]
     console.log('Last data'+ lastData);
     for ( let key in data ) {
-     //  console.log(this.questions)
      lastData.unshift({'key': key, value: data[key]});
     }
-
     for( let key in lastData){
       this.questions.push(lastData[key])
     }

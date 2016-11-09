@@ -21,7 +21,7 @@
 
   <br>
 
-<ion-searchbar (ionInput)="getItems($event,id)"></ion-searchbar>
+<ion-searchbar [(ngModel)]="searchBar" (ionInput)="getItems($event,id)"></ion-searchbar>
 
   <ion-list>
     <ion-item-sliding *ngFor="let id of questions; let i = index" (ionDrag)="onSlideItem(key)">
