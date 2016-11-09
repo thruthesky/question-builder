@@ -100,7 +100,7 @@ export class DashboardPage {
 
   displayQuestions(data?) {
     this.lastDisplayedKey = Object.keys(data).shift();
-    Object.keys(data).push();
+    Object.keys(data).pop();
 
     console.log(this.questions);
     let lastData =[]
