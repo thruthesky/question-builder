@@ -14,6 +14,8 @@ interface userMeta extends USER_DATA {
 })
 export class LoginPage {
 
+  errorChk;
+
   userData = <userMeta> {};
   regUserMail:string;
   regUserPass:string;
@@ -56,13 +58,17 @@ export class LoginPage {
    
   }
   onClickLogin(){
+    if ( this.validateForm() == false ) return;
+    this.errorChk = { progress: 'Signing in .. ' };
     this.user
       .set('email', this.loginUserMail)
       .set('password', this.loginUserPass)
       .login( re => {
+        this.errorChk = { success: 'Sign in sucess: redirecting to dashboard ..'}
         this.navCtrl.setRoot( DashboardPage );
       }, e => {
-        console.log(e)
+        this.errorChk = { error: e }
+        
         let failToast = this.toastCtrl.create({
           message: e,
           duration: 1500
@@ -71,13 +77,36 @@ export class LoginPage {
       });
   }
   onClickRegister(){
+    if ( this.validateForm() == false ) return;
+    this.errorChk = { progress: 'Registration on progress: please wait..' };
     this.user
      .sets(this.userData)
      .register(
-        ( ) => this.alert('User registration success'),
-        (e) => this.alert(e) );
+        ( ) => {this.alert('User registration success')
+      this.errorChk = { success: 'Registration success'}},
+        (e) => {
+          
+          this.errorChk = { error: e }
+      } );
+        
   }
   alert(e) {
+    this.errorChk = { error: e }
     this.toastCtrl.create({ message: e, duration: 1500 }).present();
+  }
+
+    validateForm() {
+    if ( this.loginUserMail == '' || this.userData.email =='' ) {
+      this.errorChk = { error: 'Input user email' };
+      return false;
+    }else if( this.loginUserPass == '' || this.userData.password == '' ){
+      this.errorChk = { error: 'Input Password' }
+      return false;
+    }
+    return true;
+  }
+
+  clearError(){
+    this.errorChk = {};
   }
 }

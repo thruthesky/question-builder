@@ -21,30 +21,32 @@
 
   <br>
 
+<ion-searchbar (ionInput)="getItems($event,id)"></ion-searchbar>
+
   <ion-list>
-    <ion-item-sliding *ngFor="let id of questions" (ionDrag)="onSlideItem(id)">
-      <ion-item (click)="more[id] = ! more[id]">
-       Question:  {{ contents[id].question }}
-        <button icon-only small>
-          <ion-icon name="arrow-down" small *ngIf="!more[id]"></ion-icon>
-          <ion-icon name="arrow-up" small *ngIf="more[id]"></ion-icon>
+    <ion-item-sliding *ngFor="let id of questions; let i = index" (ionDrag)="onSlideItem(key)">
+      <ion-item (click)="more[i] = ! more[i]">
+       Question:  {{ id.value.question }}
+        <button icon-only >
+          <ion-icon name="arrow-down"  *ngIf="!more[i]"></ion-icon>
+          <ion-icon name="arrow-up"  *ngIf="more[i]"></ion-icon>
         </button>
-        <div *ngIf="more[id]">
+        <div *ngIf="more[i]">
           <ion-card>
-            <div (click)="onClickChoice(ansTest=1,contents[id].answer)">
-              Choice1: {{ contents[id].choice1 }}
+            <div (click)="onClickChoice(ansTest=1,id.answer)">
+              Choice1: {{ id.value.choice1 }} 
             </div>
-            <div (click)="onClickChoice(ansTest=2,contents[id].answer)">
-              Choice2: {{ contents[id].choice2 }}
+            <div (click)="onClickChoice(ansTest=2,id.answer)">
+              Choice2: {{ id.value.choice2 }}
             </div>
-            <div (click)="onClickChoice(ansTest=3,contents[id].answer)">
-              Choice3: {{ contents[id].choice3 }}
+            <div (click)="onClickChoice(ansTest=3,id.answer)">
+              Choice3: {{ id.value.choice3 }}
             </div>
-            <div (click)="onClickChoice(ansTest=4,contents[id].answer)">
-              Choice4: {{ contents[id].choice4 }}
+            <div (click)="onClickChoice(ansTest=4,id.answer)">
+              Choice4: {{ id.value.choice4 }}
             </div>
             <div>
-              Answer: {{ contents[id].answer }}
+              Answer: {{ id.value.answer }}
             </div>
           </ion-card>
 
@@ -52,8 +54,8 @@
         </div>
       </ion-item>
       <ion-item-options >
-        <button ion-button color="secondary" (click)="onClickUpdate(id)"> Edit</button>
-        <button ion-button color="danger" (click)="onClickDelete(id)">Delete</button>
+        <button ion-button color="secondary" (click)="onClickUpdate(id.key)"> Edit</button>
+        <button ion-button color="danger" (click)="onClickDelete(id.key)">Delete</button>
       </ion-item-options>
      
     </ion-item-sliding>
@@ -65,5 +67,9 @@
   </div>
 
    <button (click)="testResign()">resign</button>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

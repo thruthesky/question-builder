@@ -25,25 +25,22 @@ interface userMeta extends USER_DATA {
   templateUrl: 'dashboard.html'
 })
 export class DashboardPage {
+  lastDisplayedKey: string = '';
   userName;
   userData = <userMeta> {};
   uid;
   more = [];
-  questionID
-  contents;
+  questionID;
+  contents = [];
   choice
+  questions = [];
   constructor(
     private navCtrl: NavController,
     private question: Post,
     private user: User
 
   ) {
-      // this.question.destroy( () => {
-           
-           
-      //   }, e => {
-      //      console.log('error:' + e)
-      //   });
+    // this.onDestroy();
   }
 
     checkUser(){
@@ -56,9 +53,27 @@ export class DashboardPage {
 
   }
 
+  onDestroy(){
+    this.question.path='question';
+          this.question.destroy( () => {
+        }, e => {
+           console.log('error:' + e)
+        });
+  }
+
+  getItems(ev, id) {
+    let val = ev.target.value;
+    if (val && val.trim() != '') {
+      this.questions = this.questions.filter( res => {
+        return ( res.value.question.toLowerCase().indexOf(val.toLowerCase()) > -1 );
+      }, e=>{console.log('error')})
+    }
+  }
+
+
   ionViewWillEnter() {
     //console.log('ionViewWillEnter()');
-    this.displayQuestions();
+    this.getQuestions();
     this.checkUser();
   }
 
@@ -75,19 +90,51 @@ export class DashboardPage {
     this.more[id] = null;
   }
 
-  displayQuestions() {
-    this.question.path = 'question';
-    this.question.gets( re => {
-      if ( re ) {
-        this.contents = re;
-        // console.log(JSON.stringify(re));
-                    
-      } 
-    }, e => {
-      console.log(e);
+  displayQuestions(data?) {
+    // save last key
+    this.lastDisplayedKey = Object.keys(data).shift();
+    Object.keys(data).push();
+    //reversing retrieve data
+
+    console.log(this.questions);
+    let lastData =[]
+    console.log('Last data'+ lastData);
+    for ( let key in data ) {
+     //  console.log(this.questions)
+     lastData.unshift({'key': key, value: data[key]});
+    }
+
+    for( let key in lastData){
+      this.questions.push(lastData[key])
+    }
+
+  }
+
+
+  
+  getQuestions( finished? ) {
+    this.question.path = 'question'
+    this.question
+      .set('lastKey', this.lastDisplayedKey )
+      .set('limitToLast', '11' )
+      .fetch( snapshot =>{
+        if(snapshot) this.displayQuestions( snapshot );
+        if ( finished ) finished();
+      }, e=>{
+        if ( finished ) finished();
+        console.info(e);
+      })
+  }
+
+  doInfinite( infiniteScroll ) {
+
+    this.getQuestions( () => {
+      infiniteScroll.complete();
     });
 
   }
+
+
   onClickChoice(ansTest, answer){
     console.log(ansTest);
     if( ansTest == answer)console.log('correct');
@@ -100,10 +147,7 @@ export class DashboardPage {
       this.navCtrl.setRoot( LoginPage )
   } );
   }
-  get questions() {
-    if ( this.contents === void 0 ) return [];
-    return Object.keys( this.contents );
-  }
+
   onClickUpdate(id){
     this.navCtrl.push( QuestionformPage, {
       questionID: id
@@ -112,11 +156,11 @@ export class DashboardPage {
   
   onClickDelete(key){
     this.question.set('key', key);
-    this.question.delete( key, s => {
+    this.question.delete( s => {
       if ( s ) alert('Error: ' + s);
       else {
         console.log('success: removing from content');
-        this.contents = {};
+        this.contents = [];
         this.displayQuestions();
       }
     }, e => {

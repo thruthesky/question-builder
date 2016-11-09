@@ -27,7 +27,9 @@ export class QuestionformPage {
     this.questionID = this.navPar.get('questionID');
     console.log('question ID', this.questionID);
 
-    // for ( let i = 0; i < 11; i ++ ) {
+    console.log(this.questionID)
+
+    // for ( let i = 1; i < 21; i ++ ) {
     //   this.questionPost.path = 'question';
     //   this.questionPost
     //     .set('question', 'Question No. ' + i )
@@ -42,6 +44,8 @@ export class QuestionformPage {
     //       console.log(e)
     //     })
     // }
+
+    // this.questionCategory()
     
 
 
@@ -93,24 +97,29 @@ export class QuestionformPage {
   }
 
   validateForm() {
-    if ( this.question.answer == '' ) {
-      this.track = { error: 'Input answer' };
+    if ( this.question.question == '' ) {
+      this.track = { error: 'No Question' };
+      return false;
+    }else if( this.question.answer == '' ){
+      this.track = { error: 'Input answer' }
       return false;
     }
     return true;
   }
   onClickCreate(){
-    this.validateForm();
+    if ( this.validateForm() == false ) return;
     this.track = { progress: 'Updating ...' };
     this.questionPost
       .sets(this.question)
       .create( () => {
-        this.onClickReset()
         this.track = { success: 'Update success!' };
+        this.onClickReset()
       }, e => {
         console.log(e)
         this.track = { error: e };
       });
+
+    console.log(this.question.answer)
   }
   onClickUpdate() {
     if ( this.validateForm() == false ) return;
