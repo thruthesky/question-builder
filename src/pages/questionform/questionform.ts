@@ -20,7 +20,7 @@ export class QuestionformPage {
   track;
   constructor(
     private navCtrl: NavController,
-    private category: Category,
+    private category: Category,   
     private questionPost: Post,
     private navPar: NavParams
   ) {
@@ -29,10 +29,10 @@ export class QuestionformPage {
 
     console.log(this.questionID)
 
-    // for ( let i = 1; i < 21; i ++ ) {
+    // for ( let i = 1; i < 51; i ++ ) {
     //   this.questionPost.path = 'question';
     //   this.questionPost
-    //     .set('question', 'Question No. ' + i )
+    //     .set('question', 'This is Question No. ' + i )
     //     .set('choice1', 'choice a. ' + i)
     //     .set('choice2', 'choice b. ' + i)
     //     .set('choice3', 'choice c. ' + i)

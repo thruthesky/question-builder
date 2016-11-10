@@ -4,6 +4,7 @@ import { QuestionformPage } from '../questionform/questionform';
 import { LoginPage } from '../login/login';
 import {Post} from "../../fireframe2/post";
 import { User, USER_DATA } from '../../fireframe2/user';
+import * as _ from 'lodash'
 
 //import { LoginPage } from '../login/login';
 //import { AngularFire, FirebaseAuth } from 'angularfire2';
@@ -25,6 +26,7 @@ interface userMeta extends USER_DATA {
   templateUrl: 'dashboard.html'
 })
 export class DashboardPage {
+  noMorePost: boolean = false;
   searchBar:string = '';
   lastDisplayedKey: string = '';
   userName;
@@ -35,6 +37,8 @@ export class DashboardPage {
   contents = [];
   choice
   questions = [];
+  previous = [];
+  searchedItem = [];
   constructor(
     private navCtrl: NavController,
     private question: Post,
@@ -62,20 +66,37 @@ export class DashboardPage {
         });
   }
 
+
+
+  // debounce(callback, wait, immediate){
+  //   let timeout;
+  //   return function(){
+  //     let context = this, args = arguments;
+  //     let later = () =>{
+  //       timeout = null;
+  //       if(!immediate) callback.apply(context,args);
+  //     };
+  //     let callnow = immediate && !timeout;
+  //     clearTimeout(timeout);
+  //     timeout = setTimeout(later, wait);
+  //     if( callnow ) callback.apply(context, args)
+  //   }
+  // }
+
+
+
+
+
+
   getItems(ev) {
-     if(this.searchBar == ''){
-      this.getQuestions();
-      return;
-    }
     let val = ev.target.value;
+
     if (val && val.trim() != '') {
-      this.questions = this.questions.filter( res => {
+      this.searchedItem = this.questions.filter( res => {
+        console.log('check searched: ' + this.searchedItem[0].question)
         return ( res.value.question.toLowerCase().indexOf(val.toLowerCase()) > -1 );
       }, e=>{console.log('error')})
     }
-
-   
-
   }
 
 
@@ -99,43 +120,53 @@ export class DashboardPage {
   }
 
   displayQuestions(data?) {
-    this.lastDisplayedKey = Object.keys(data).shift();
-    Object.keys(data).pop();
-
-    console.log(this.questions);
-    let lastData =[]
-    console.log('Last data'+ lastData);
-    for ( let key in data ) {
-     lastData.unshift({'key': key, value: data[key]});
-    }
-    for( let key in lastData){
-      this.questions.push(lastData[key])
-    }
+      for( let key of Object.keys(data).reverse() ) {
+        this.questions.push ( {key: key, value: data[key]} );
+        this.searchedItem.push( {key: key, value: data[key]} );
+      }
 
   }
 
-
-  
-  getQuestions( finished? ) {
+  getQuestions( infinite? ) {
     this.question.path = 'question'
     this.question
-      .set('lastKey', this.lastDisplayedKey )
-      .set('limitToLast', '11' )
-      .fetch( snapshot =>{
-        if(snapshot) this.displayQuestions( snapshot );
-        if ( finished ) finished();
-      }, e=>{
-        if ( finished ) finished();
-        console.info(e);
-      })
+        .set('numberOfPosts', 5)
+        .nextPage( data => {
+          console.log('loadPoss: ', data);
+          if ( infinite ) infinite.complete();
+          if ( ! _.isEmpty(data) ) this.displayQuestions( data );
+          else {
+            this.noMorePost = true;
+            infinite.enable( false );
+          }
+        },
+        e => {
+          if ( infinite ) infinite.complete();
+          console.log("fetch failed: ", e);
+        });
   }
 
-  doInfinite( infiniteScroll ) {
+  doInfinite( infiniteScroll? ) {
 
-    this.getQuestions( () => {
-      infiniteScroll.complete();
-    });
+  this.getQuestions( infiniteScroll );
 
+  }
+  onClickNext(){
+    if(! this.noMorePost ){
+      this.questions = [];
+      this.doInfinite();
+      
+    }else{
+      this.questions = this.previous;
+      this.doInfinite()
+    }
+
+  }
+
+  onClickPrevious(){
+    this.questions = [];
+    this.doInfinite();
+    this.questions = this.previous
   }
 
 

@@ -83,7 +83,9 @@ export class LoginPage {
      .sets(this.userData)
      .register(
         ( ) => {this.alert('User registration success')
-      this.errorChk = { success: 'Registration success'}},
+      this.errorChk = { success: 'Registration success'}
+      this.navCtrl.setRoot( DashboardPage );
+    },
         (e) => {
           
           this.errorChk = { error: e }
