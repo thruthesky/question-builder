@@ -46,6 +46,10 @@ export class LoginPage {
 
   }
 
+  onClickForgotPass(){
+    
+  }
+
   onClickReset(){
     this.userData.email = undefined;
     this.userData.password = undefined;
