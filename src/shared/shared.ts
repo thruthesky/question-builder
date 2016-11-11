@@ -1,5 +1,6 @@
 export let questionData = {
   question:'',
+  key: '',
   category: 'questions',
   choice1:'',
   choice2:'',

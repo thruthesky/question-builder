@@ -89,11 +89,18 @@ export class DashboardPage {
 
 
   getItems(ev) {
+
+    // let temp;
     let val = ev.target.value;
+
+    if(!val){
+      this.searchedItem = [];
+      this.searchedItem = this.questions;
+    }
 
     if (val && val.trim() != '') {
       this.searchedItem = this.questions.filter( res => {
-        console.log('check searched: ' + this.searchedItem[0].question)
+        // console.log('check searched: ' + this.searchedItem[0].question)
         return ( res.value.question.toLowerCase().indexOf(val.toLowerCase()) > -1 );
       }, e=>{console.log('error')})
     }
