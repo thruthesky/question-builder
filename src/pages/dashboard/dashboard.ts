@@ -211,12 +211,13 @@ export class DashboardPage {
   }
   
   onClickDelete(key){
+    this.question.path = 'question'
     this.question.set('key', key);
     this.question.delete( s => {
       if ( s ) alert('Error: ' + s);
       else {
         console.log('success: removing from content');
-        this.contents = [];
+        this.questions = [];
         this.displayQuestions();
       }
     }, e => {
