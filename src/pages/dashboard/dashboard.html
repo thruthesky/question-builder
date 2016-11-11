@@ -98,15 +98,16 @@
     </ion-item-sliding>
   </ion-list>
 
-  <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="!noMorePost">
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="!noMorePost">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>-->
+  </ion-infinite-scroll>
 
   <h1 *ngIf=" noMorePost ">
       There is no more posts.
   </h1>
-  <div>{{ page }}</div>
+  <!--<div>{{ page }}</div>
 <button ion-button  (click)="onClickPrevious()" >Previous</button>
 <button ion-button disabled *ngIf="noMorePost">Next</button>
-<button ion-button (click)="onClickNext()" *ngIf="!noMorePost">Next</button>
+<button ion-button (click)="onClickNext()" *ngIf="!noMorePost">Next</button>-->
+
 </ion-content>

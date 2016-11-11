@@ -169,9 +169,9 @@ export class DashboardPage {
 
   }
   onClickNext(){
-    
+    this.previous = this.questions;
     if(! this.noMorePost ){
-      this.previous = this.questions;
+      
       console.log('page::()' + JSON.stringify(this.previous) + 'this')
       this.questions = [];
       this.doInfinite();
@@ -185,8 +185,9 @@ export class DashboardPage {
   }
 
   onClickPrevious(){
-    this.page = this.page - 1;
     this.questions = this.previous
+    this.page = this.page - 1;
+    
   }
 
 
