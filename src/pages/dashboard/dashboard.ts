@@ -39,6 +39,7 @@ export class DashboardPage {
   questions = [];
   previous = [];
   searchedItem = [];
+  page:number = 1;
   constructor(
     private navCtrl: NavController,
     private question: Post,
@@ -129,9 +130,18 @@ export class DashboardPage {
   displayQuestions(data?) {
       for( let key of Object.keys(data).reverse() ) {
         this.questions.push ( {key: key, value: data[key]} );
-        this.searchedItem.push( {key: key, value: data[key]} );
+        // this.searchedItem.push( {key: key, value: data[key]} );
       }
 
+  }
+
+  getSearched( key? ){
+    this.question.path = 'question'
+    this.question
+      .set('key', key)
+      .get( re =>{
+
+      },e=>{})
   }
 
   getQuestions( infinite? ) {
@@ -159,10 +169,14 @@ export class DashboardPage {
 
   }
   onClickNext(){
+    
     if(! this.noMorePost ){
+      this.previous = this.questions;
+      console.log('page::()' + JSON.stringify(this.previous) + 'this')
       this.questions = [];
       this.doInfinite();
-      
+      // this.previous = this.questions;
+      this.page = this.page + 1; 
     }else{
       this.questions = this.previous;
       this.doInfinite()
@@ -171,8 +185,7 @@ export class DashboardPage {
   }
 
   onClickPrevious(){
-    this.questions = [];
-    this.doInfinite();
+    this.page = this.page - 1;
     this.questions = this.previous
   }
 

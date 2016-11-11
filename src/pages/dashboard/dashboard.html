@@ -105,7 +105,8 @@
   <h1 *ngIf=" noMorePost ">
       There is no more posts.
   </h1>
-<button ion-button disabled (click)="onClickPrevious()" >Previous</button>
+  <div>{{ page }}</div>
+<button ion-button  (click)="onClickPrevious()" >Previous</button>
 <button ion-button disabled *ngIf="noMorePost">Next</button>
 <button ion-button (click)="onClickNext()" *ngIf="!noMorePost">Next</button>
 </ion-content>

@@ -29,21 +29,21 @@ export class QuestionformPage {
 
     console.log(this.questionID)
 
-    for ( let i = 1; i < 51; i ++ ) {
-      this.questionPost.path = 'question';
-      this.questionPost
-        .set('question', 'This is Question No. ' + i )
-        .set('choice1', 'choice a. ' + i)
-        .set('choice2', 'choice b. ' + i)
-        .set('choice3', 'choice c. ' + i)
-        .set('choice4', 'choice d. ' + i)
-        .set('answer', 'answer. ' + i)
-        .create( () => {
-          console.log('question: ' + i + ' created !!');
-        }, e => {
-          console.log(e)
-        })
-    }
+    // for ( let i = 1; i < 51; i ++ ) {
+    //   this.questionPost.path = 'question';
+    //   this.questionPost
+    //     .set('question', 'This is Question No. ' + i )
+    //     .set('choice1', 'choice a. ' + i)
+    //     .set('choice2', 'choice b. ' + i)
+    //     .set('choice3', 'choice c. ' + i)
+    //     .set('choice4', 'choice d. ' + i)
+    //     .set('answer', 'answer. ' + i)
+    //     .create( () => {
+    //       console.log('question: ' + i + ' created !!');
+    //     }, e => {
+    //       console.log(e)
+    //     })
+    // }
 
     // this.questionCategory()
     
