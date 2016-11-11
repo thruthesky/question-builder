@@ -89,7 +89,7 @@ export class DashboardPage {
 
 
 
-  getItems(ev) {
+  searchQuestions(ev) {
 
     // let temp;
     let val = ev.target.value;

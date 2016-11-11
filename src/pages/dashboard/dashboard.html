@@ -21,7 +21,7 @@
 
   <br>
 
-<ion-searchbar [(ngModel)]="searchBar" (ionInput)="getItems($event,id)"></ion-searchbar>
+<ion-searchbar [(ngModel)]="searchBar" (ionInput)="searchQuestions($event,id)"></ion-searchbar>
 <section *ngIf="searchBar">
       <ion-item-sliding *ngFor="let id of searchedItem; let i = index" (ionDrag)="onSlideItem(key)">
       <ion-item (click)="more[i] = ! more[i]">
