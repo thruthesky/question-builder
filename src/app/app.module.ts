@@ -5,7 +5,9 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage }from '../pages/login/login';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { QuestionformPage } from '../pages/questionform/questionform';
+import { TestPage } from '../pages/test/test';
 import { FireModule } from '../fireframe2/fire-module';
+
 
 @NgModule({
   declarations: [
@@ -13,7 +15,8 @@ import { FireModule } from '../fireframe2/fire-module';
     HomePage,
     DashboardPage,
     LoginPage,
-    QuestionformPage
+    QuestionformPage,
+    TestPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -25,7 +28,8 @@ import { FireModule } from '../fireframe2/fire-module';
     HomePage,
     DashboardPage,
     LoginPage,
-    QuestionformPage
+    QuestionformPage,
+    TestPage
   ],
   providers: []
 })

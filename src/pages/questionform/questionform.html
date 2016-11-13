@@ -24,32 +24,32 @@
 
   <ion-list>
     <ion-item>
-      <ion-label fixed>Question</ion-label>
+      <ion-label floating>Question</ion-label>
       <ion-input [(ngModel)]="question.question"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label fixed>Choice1</ion-label>
+      <ion-label floating>Choice1</ion-label>
       <ion-input [(ngModel)]="question.choice1"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label fixed>Choice2</ion-label>
+      <ion-label floating>Choice2</ion-label>
       <ion-input [(ngModel)]="question.choice2"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label fixed>Choice3</ion-label>
+      <ion-label floating>Choice3</ion-label>
       <ion-input [(ngModel)]="question.choice3"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label fixed>Choice4</ion-label>
+      <ion-label floating>Choice4</ion-label>
       <ion-input [(ngModel)]="question.choice4"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label fixed>Answer</ion-label>
+      <ion-label floating>Answer</ion-label>
         <ion-select [(ngModel)]="question.answer">
           <ion-option selected='false' value=1>{{ question.choice1 }}</ion-option>
           <ion-option value=2>{{ question.choice2 }}</ion-option>

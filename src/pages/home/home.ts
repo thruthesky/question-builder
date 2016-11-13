@@ -20,14 +20,14 @@ export class HomePage {
     public navCtrl: NavController,
     public user: User
     ) {
+
+    }
+
+  ionViewDidLoad() {
       this.user.loggedIn( (userData) => {
         console.log('HomePage::constructor() user.loggedIn() : yes : userData : ', userData);
         this.navCtrl.setRoot( DashboardPage );
       }, e => this.navCtrl.setRoot( LoginPage ) );
-    }
-
-  ionViewDidLoad() {
-    console.log('Hello HomePage Page');
   }
 
 }

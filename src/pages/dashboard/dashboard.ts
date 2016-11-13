@@ -47,6 +47,8 @@ export class DashboardPage {
 
   ) {
     // this.onDestroy();
+    this.question.pagination_key = '';
+    this.getQuestions();
   }
 
     checkUser(){
@@ -110,7 +112,7 @@ export class DashboardPage {
 
   ionViewWillEnter() {
     //console.log('ionViewWillEnter()');
-    this.getQuestions();
+    
     this.checkUser();
   }
 
@@ -147,9 +149,8 @@ export class DashboardPage {
   getQuestions( infinite? ) {
     this.question.path = 'question'
     this.question
-        .set('numberOfPosts', 5)
+        .set( 'numberOfPosts', 10 )
         .nextPage( data => {
-          console.log('loadPoss: ', data);
           if ( infinite ) infinite.complete();
           if ( ! _.isEmpty(data) ) this.displayQuestions( data );
           else {
@@ -159,7 +160,7 @@ export class DashboardPage {
         },
         e => {
           if ( infinite ) infinite.complete();
-          console.log("fetch failed: ", e);
+          console.log( e );
         });
   }
 
@@ -205,24 +206,27 @@ export class DashboardPage {
   }
 
   onClickUpdate(id){
+    this.navCtrl.pop();
     this.navCtrl.push( QuestionformPage, {
       questionID: id
     })
   }
   
-  onClickDelete(key){
+  onClickDelete(key, indx){
     this.question.path = 'question'
     this.question.set('key', key);
-    this.question.delete( s => {
-      if ( s ) alert('Error: ' + s);
-      else {
+    this.question.delete( () => {
+        
         console.log('success: removing from content');
-        this.questions = [];
+        this.questions.splice(indx,1)
         this.displayQuestions();
-      }
+        return;
     }, e => {
-      alert('Error: ' + e);
+      console.log( key );
     });
+    
+
+
   }
 
 }

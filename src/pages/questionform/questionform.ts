@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Category } from '../../fireframe2/category';
 import { Post } from '../../fireframe2/post';
 import { questionData } from '../../shared/shared';
+import { DashboardPage } from '../dashboard/dashboard'
+// import { TestPage } from '../test/test';
+import { HomePage } from '../home/home'
+
 /*
   Generated class for the Questionform page.
 
@@ -22,28 +26,29 @@ export class QuestionformPage {
     private navCtrl: NavController,
     private category: Category,   
     private questionPost: Post,
-    private navPar: NavParams
+    private navPar: NavParams,
+    private alrtCtrl: AlertController
   ) {
     this.questionID = this.navPar.get('questionID');
     console.log('question ID', this.questionID);
 
     console.log(this.questionID)
 
-    for ( let i = 1; i < 101; i ++ ) {
-      this.questionPost.path = 'question';
-      this.questionPost
-        .set('question', 'This is Question No. ' + i )
-        .set('choice1', 'choice a. ' + i)
-        .set('choice2', 'choice b. ' + i)
-        .set('choice3', 'choice c. ' + i)
-        .set('choice4', 'choice d. ' + i)
-        .set('answer', 3)
-        .create( () => {
-          console.log('question: ' + i + ' created !!');
-        }, e => {
-          console.log(e)
-        })
-    }
+    // for ( let i = 1; i < 101; i ++ ) {
+    //   this.questionPost.path = 'question';
+    //   this.questionPost
+    //     .set('question', 'This is Question No. ' + i )
+    //     .set('choice1', 'choice a. ' + i)
+    //     .set('choice2', 'choice b. ' + i)
+    //     .set('choice3', 'choice c. ' + i)
+    //     .set('choice4', 'choice d. ' + i)
+    //     .set('answer', 3)
+    //     .create( () => {
+    //       console.log('question: ' + i + ' created !!');
+    //     }, e => {
+    //       console.log(e)
+    //     })
+    // }
 
     // this.questionCategory()
     
@@ -124,6 +129,7 @@ export class QuestionformPage {
     console.log(this.question.answer)
   }
   onClickUpdate() {
+
     if ( this.validateForm() == false ) return;
     this.track = { progress: 'Updating ...' };
     this.questionPost.path = 'question';
@@ -142,10 +148,14 @@ export class QuestionformPage {
         console.log(e)
         this.track = { error: e };
       })
+
+
+
   }
 
   onClickBack(){
-    this.navCtrl.pop();
+    this.navCtrl.push( HomePage )
+
   }
 
 }
