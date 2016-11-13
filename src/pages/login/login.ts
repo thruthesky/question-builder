@@ -37,7 +37,7 @@ export class LoginPage {
 // observable
 //  checks anfularfire auth if user is logged in.
   checkUser() {
-    this.user.loggedIn( (userData) => {
+    this.user.loggedIn( ( userData ) => {
       this.navCtrl.setRoot( DashboardPage );
     }, e => console.error( e ) );
   }
@@ -51,6 +51,11 @@ export class LoginPage {
   }
 
   onClickReset(){
+    if( this.authentication == 'login' ){
+      this.loginUserMail = undefined;
+      this.loginUserPass = undefined;
+      return
+    }
     this.userData.email = undefined;
     this.userData.password = undefined;
     this.userData.displayName = undefined;
@@ -65,19 +70,20 @@ export class LoginPage {
     if ( this.validateForm() == false ) return;
     this.errorChk = { progress: 'Signing in .. ' };
     this.user
-      .set('email', this.loginUserMail)
-      .set('password', this.loginUserPass)
+      .set( 'email', this.loginUserMail )
+      .set( 'password', this.loginUserPass )
       .login( re => {
         this.errorChk = { success: 'Sign in sucess: redirecting to dashboard ..'}
         this.navCtrl.setRoot( DashboardPage );
+        this.toastCtrl.create( { message:'sucess', duration: 1500 } ).present();
       }, e => {
         this.errorChk = { error: e }
         
-        let failToast = this.toastCtrl.create({
+        this.toastCtrl.create({
           message: e,
           duration: 1500
         })
-        failToast.present();
+        .present();
       });
   }
   onClickRegister(){
@@ -86,13 +92,14 @@ export class LoginPage {
     this.user
      .sets(this.userData)
      .register(
-        ( ) => {this.alert('User registration success')
-      this.errorChk = { success: 'Registration success'}
+        ( ) => {this.alert( 'User registration success' )
+      this.errorChk = { success: 'Registration success' }
       this.navCtrl.setRoot( DashboardPage );
     },
         (e) => {
           
           this.errorChk = { error: e }
+          this.toastCtrl.create( { message: e , duration: 1500 } ).present();
       } );
         
   }

@@ -3,8 +3,6 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Category } from '../../fireframe2/category';
 import { Post } from '../../fireframe2/post';
 import { questionData } from '../../shared/shared';
-import { DashboardPage } from '../dashboard/dashboard'
-// import { TestPage } from '../test/test';
 import { HomePage } from '../home/home'
 
 /*
@@ -36,13 +34,14 @@ export class QuestionformPage {
 
     // for ( let i = 1; i < 101; i ++ ) {
     //   this.questionPost.path = 'question';
+    //   this.question.question = 'This is Question No. ' + i;
+    //   this.question.choice1 = 'choice 1' + i;
+    //   this.question.choice2 = 'choice 2' + i;
+    //   this.question.choice3 = 'choice 3' + i;
+    //   this.question.choice4 = 'choice 4' + i;
+    //   this.question.answer = '1';
     //   this.questionPost
-    //     .set('question', 'This is Question No. ' + i )
-    //     .set('choice1', 'choice a. ' + i)
-    //     .set('choice2', 'choice b. ' + i)
-    //     .set('choice3', 'choice c. ' + i)
-    //     .set('choice4', 'choice d. ' + i)
-    //     .set('answer', 3)
+    //     .sets( this.question )
     //     .create( () => {
     //       console.log('question: ' + i + ' created !!');
     //     }, e => {
@@ -117,7 +116,7 @@ export class QuestionformPage {
     this.track = { progress: 'Updating ...' };
     this.question.key = this.question.question;
     this.questionPost
-      .sets(this.question)
+      .sets( this.question )
       .create( () => {
         this.track = { success: 'Update success!' };
         this.onClickReset()

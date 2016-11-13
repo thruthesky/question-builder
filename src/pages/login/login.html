@@ -19,11 +19,11 @@
       <h3>Login</h3>
       <ion-list>
         <ion-item>
-          <ion-label fixed>Email</ion-label>
-          <ion-input [(ngModel)]="loginUserMail"></ion-input>
+          <ion-label stacked>Email</ion-label>
+          <ion-input [(ngModel)]="loginUserMail" (focus)="clearError()"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label fixed>Password</ion-label>
+          <ion-label stacked>Password</ion-label>
           <ion-input [(ngModel)]="loginUserPass"></ion-input>
         </ion-item>
       </ion-list>
@@ -33,15 +33,15 @@
       <h3>Register</h3>
       <ion-list>
         <ion-item>
-          <ion-label fixed>Email</ion-label>
+          <ion-label stacked>Email</ion-label>
           <ion-input [(ngModel)]="userData.email"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label fixed>Password</ion-label>
+          <ion-label stacked>Password</ion-label>
           <ion-input [(ngModel)]="userData.password"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label fixed>Name</ion-label>
+          <ion-label stacked>Name</ion-label>
           <ion-input [(ngModel)]="userData.displayName"></ion-input>
         </ion-item>
       </ion-list>

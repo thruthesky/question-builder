@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-import { TestPage } from '../pages/test/test';
 import { HomePage } from '../pages/home/home';
 
 

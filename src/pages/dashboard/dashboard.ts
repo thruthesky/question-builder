@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { QuestionformPage } from '../questionform/questionform';
 import { LoginPage } from '../login/login';
 import {Post} from "../../fireframe2/post";
@@ -26,6 +26,9 @@ interface userMeta extends USER_DATA {
   templateUrl: 'dashboard.html'
 })
 export class DashboardPage {
+
+  waitingList:boolean;
+
   noMorePost: boolean = false;
   searchBar:string = '';
   lastDisplayedKey: string = '';
@@ -43,7 +46,8 @@ export class DashboardPage {
   constructor(
     private navCtrl: NavController,
     private question: Post,
-    private user: User
+    private user: User,
+    private toastCtrl: ToastController
 
   ) {
     // this.onDestroy();
@@ -130,6 +134,7 @@ export class DashboardPage {
   }
 
   displayQuestions(data?) {
+    this.waitingList = false
       for( let key of Object.keys(data).reverse() ) {
         this.questions.push ( {key: key, value: data[key]} );
         // this.searchedItem.push( {key: key, value: data[key]} );
@@ -147,6 +152,7 @@ export class DashboardPage {
   }
 
   getQuestions( infinite? ) {
+    this.waitingList = true;
     this.question.path = 'question'
     this.question
         .set( 'numberOfPosts', 10 )
@@ -212,21 +218,28 @@ export class DashboardPage {
     })
   }
   
-  onClickDelete(key, indx){
+  onClickDelete( key, indx ){
     this.question.path = 'question'
-    this.question.set('key', key);
-    this.question.delete( () => {
-        
+    this.question.set( 'key', key );
+    this.question.delete( s => {
+        this.toastCtrl.create( { message:'deleted question sucessfully', duration: 1500 } ).present();
         console.log('success: removing from content');
-        this.questions.splice(indx,1)
-        this.displayQuestions();
-        return;
+        this.questions.splice( indx, 1 ) 
     }, e => {
-      console.log( key );
+      console.log( 'error: ' + e )
     });
     
 
 
+  }
+
+  onRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
   }
 
 }
