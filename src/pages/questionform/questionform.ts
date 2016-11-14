@@ -91,8 +91,8 @@ export class QuestionformPage {
         .get( re => {
           this.question = re;
           this.question.key = this.questionID;
-          
         }, e => alert(e) );
+        return;
     }
 
   }
