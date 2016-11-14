@@ -4,7 +4,6 @@ import { QuestionformPage } from '../questionform/questionform';
 import { LoginPage } from '../login/login';
 import {Post} from "../../fireframe2/post";
 import { User, USER_DATA } from '../../fireframe2/user';
-import * as _ from 'lodash'
 
 //import { LoginPage } from '../login/login';
 //import { AngularFire, FirebaseAuth } from 'angularfire2';
@@ -51,6 +50,7 @@ export class DashboardPage {
 
   ) {
     // this.onDestroy();
+    this.question.resetPagination();
     this.getQuestions();
   }
 
@@ -133,6 +133,7 @@ export class DashboardPage {
   }
 
   displayQuestions(data?) {
+    if ( data === void 0 || data == '' ) return;
     this.waitingList = false
       for( let key of Object.keys(data).reverse() ) {
         this.questions.push ( {key: key, value: data[key]} );
@@ -157,10 +158,12 @@ export class DashboardPage {
         .set( 'numberOfPosts', 10 )
         .nextPage( data => {
           if ( infinite ) { infinite.complete(); this.waitingList = false; } 
-          if ( ! _.isEmpty(data) ) this.displayQuestions( data );
-          else {
-            this.noMorePost = true;
-            infinite.enable( false );
+          this.displayQuestions( data );
+           {
+            if ( this.question.isLastPage() ) {
+              this.noMorePost = true;
+              infinite.enable( false );
+            }
           }
         },
         e => {
