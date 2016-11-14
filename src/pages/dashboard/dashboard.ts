@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController, AlertController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { QuestionformPage } from '../questionform/questionform';
 import { LoginPage } from '../login/login';
 import {Post} from "../../fireframe2/post";
@@ -47,8 +47,7 @@ export class DashboardPage {
     private navCtrl: NavController,
     private question: Post,
     private user: User,
-    private toastCtrl: ToastController,
-    private alrtCtrl: AlertController
+    private toastCtrl: ToastController
 
   ) {
     // this.onDestroy();
@@ -222,30 +221,13 @@ export class DashboardPage {
   onClickDelete( key, indx ){
     this.question.path = 'question'
     this.question.set( 'key', key );
-    this.alrtCtrl.create({
-      title:'Delete Question',
-      subTitle:'Are you sure you want to delete?',
-      buttons:[{
-        text:'ok',
-        handler:()=>{
-              this.question.delete( s => {
-              this.toastCtrl
-              .create( 
-                { message:'deleted question sucessfully', duration: 1500 } 
-                )
-                .present()
-              console.log('success: removing from content');
-              this.questions.splice( indx, 1 ) 
-          }, e => {
-            console.log( 'error: ' + e )
-          });
-        }
-      },
-      {
-        text:'cancel',
-        handler:()=>{ console.log('cancel') }
-      }]
-    }).present();
+    this.question.delete( s => {
+        this.toastCtrl.create( { message:'deleted question sucessfully', duration: 1500 } ).present();
+        console.log('success: removing from content');
+        this.questions.splice( indx, 1 ) 
+    }, e => {
+      console.log( 'error: ' + e )
+    });
     
 
 
