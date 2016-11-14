@@ -72,11 +72,11 @@
     </ion-list>
 
   </section>
-    <ion-refresher (ionRefresh)="onRefresh($event)">
+    <!--<ion-refresher (ionRefresh)="onRefresh($event)">
       <ion-refresher-content>
         
       </ion-refresher-content>
-    </ion-refresher>
+    </ion-refresher>-->
   <ion-list *ngIf="!searchBar">
     <h3 *ngIf="waitingList"><ion-spinner></ion-spinner> Please wait...</h3>
     <ion-item-sliding  *ngFor="let id of questions; let i = index" (ionDrag)="onSlideItem(key)">

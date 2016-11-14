@@ -90,6 +90,7 @@ export class QuestionformPage {
         .set('key', this.questionID )
         .get( re => {
           this.question = re;
+          this.question.key = this.questionID;
           
         }, e => alert(e) );
     }
@@ -113,13 +114,14 @@ export class QuestionformPage {
   }
   onClickCreate(){
     if ( this.validateForm() == false ) return;
-    this.track = { progress: 'Updating ...' };
-    this.question.key = this.question.question;
+    if( !this.questionID ) { this.track = { progress: 'Creating ...' };  }
+    this.track = { progress: 'Updating ...' }
     this.questionPost
       .sets( this.question )
       .create( () => {
-        this.track = { success: 'Update success!' };
-        this.onClickReset()
+        if( this.questionID ) { this.track = { success: 'Update question success!' }; return }
+        this.track = { success: 'Create question success!' }
+        if( this.questionID )this.onClickReset()
       }, e => {
         console.log(e)
         this.track = { error: e };
@@ -127,33 +129,9 @@ export class QuestionformPage {
 
     console.log(this.question.answer)
   }
-  onClickUpdate() {
-
-    if ( this.validateForm() == false ) return;
-    this.track = { progress: 'Updating ...' };
-    this.questionPost.path = 'question';
-    this.questionPost
-      .set( 'key', this.questionID )
-      .set( 'question', this.question.question )
-      .set( 'choice1', this.question.choice1 )
-      .set( 'choice2', this.question.choice2 )
-      .set( 'choice3', this.question.choice3 )
-      .set( 'choice4', this.question.choice4 )
-      .set( 'answer', this.question.answer )
-      .update( () => {
-        // this.onClickBack();
-        this.track = { success: 'Update success!' };
-      },e=>{
-        console.log(e)
-        this.track = { error: e };
-      })
-
-
-
-  }
 
   onClickBack(){
-    this.navCtrl.push( HomePage )
+    this.navCtrl.setRoot( HomePage )
 
   }
 

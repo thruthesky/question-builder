@@ -157,7 +157,7 @@ export class DashboardPage {
     this.question
         .set( 'numberOfPosts', 10 )
         .nextPage( data => {
-          if ( infinite ) infinite.complete();
+          if ( infinite ) { infinite.complete(); this.waitingList = false; } 
           if ( ! _.isEmpty(data) ) this.displayQuestions( data );
           else {
             this.noMorePost = true;

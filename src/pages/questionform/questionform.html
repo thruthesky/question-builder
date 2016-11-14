@@ -64,8 +64,8 @@
   <div success *ngIf=" track?.success "><ion-icon name="checkmark"></ion-icon>{{ track.success }}</div>
   <div error *ngIf=" track?.error "><ion-icon name="bug"></ion-icon>{{ track.error }}</div>
 
-  <button ion-button (click)="onClickCreate()" *ngIf="!questionID" small>Create</button>
-  <button ion-button (click)="onClickUpdate()" *ngIf="questionID" small>Update</button>
-  <button ion-button small (click)="onClickReset()" *ngIf="!questionID">Reset</button>
+  <button ion-button (click)="onClickCreate()"  small> <span *ngIf="!questionID">Create</span><span *ngIf="questionID">Update</span></button>
+  <!--<button ion-button (click)="onClickUpdate()" *ngIf="questionID" small>Update</button>-->
+  <button ion-button small (click)="onClickReset()" >Reset</button>
   <button ion-button (click)="onClickBack()" small>Back</button>
 </ion-content>
