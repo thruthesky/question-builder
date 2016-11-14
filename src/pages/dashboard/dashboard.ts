@@ -51,7 +51,6 @@ export class DashboardPage {
 
   ) {
     // this.onDestroy();
-    this.question.pagination_key = '';
     this.getQuestions();
   }
 
