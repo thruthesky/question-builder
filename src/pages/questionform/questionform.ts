@@ -48,7 +48,6 @@ export class QuestionformPage {
     //       console.log(e)
     //     })
     // }
-
     // this.questionCategory()
     
 
