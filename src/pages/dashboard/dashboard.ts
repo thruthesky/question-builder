@@ -71,20 +71,22 @@ export class DashboardPage {
         });
   }
 
-  // debounce(callback, wait, immediate){
+  // debounce(action, wait, immediate){
   //   let timeout;
   //   return function(){
   //     let context = this, args = arguments;
   //     let later = () =>{
   //       timeout = null;
-  //       if(!immediate) callback.apply(context,args);
+  //       if(!immediate) action.apply(context,args);
   //     };
   //     let callnow = immediate && !timeout;
   //     clearTimeout(timeout);
   //     timeout = setTimeout(later, wait);
-  //     if( callnow ) callback.apply(context, args)
+  //     if( callnow ) action.apply(context, args)
   //   }
   // }
+
+  
 
   searchQuestions(ev) {
     // let temp;
