@@ -1,6 +1,5 @@
 # Quiz-Builder for quiz app
 
-Used Firebase's Authentication and Database service.
     
 ###Installation*
 
