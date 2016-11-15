@@ -54,11 +54,13 @@ export class LoginPage {
     if( this.authentication == 'login' ){
       this.loginUserMail = undefined;
       this.loginUserPass = undefined;
+      this.errorChk = {};
       return
     }
     this.userData.email = undefined;
     this.userData.password = undefined;
     this.userData.displayName = undefined;
+    this.errorChk = {};
   }
   ionViewWillEnter(){
     // this.checkUser();
