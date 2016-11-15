@@ -75,13 +75,22 @@ export class LoginPage {
       .login( re => {
         this.errorChk = { success: 'Sign in sucess: redirecting to dashboard ..'}
         this.navCtrl.setRoot( DashboardPage );
-        this.toastCtrl.create( { message:'sucess', duration: 1500 } ).present();
+        this.toastCtrl.create( { 
+          message:'sucess', 
+          duration: 2500,
+          showCloseButton: true,
+          closeButtonText: 'x',
+          position: 'top' 
+        } ).present();
       }, e => {
         this.errorChk = { error: e }
         
         this.toastCtrl.create({
           message: e,
-          duration: 1500
+          showCloseButton: true,
+          closeButtonText: 'x',
+          position: 'top',
+          duration: 2500
         })
         .present();
       });
@@ -105,7 +114,13 @@ export class LoginPage {
   }
   alert(e) {
     this.errorChk = { error: e }
-    this.toastCtrl.create({ message: e, duration: 1500 }).present();
+    this.toastCtrl.create({ 
+      message: e, 
+      duration: 2500,
+      showCloseButton: true,
+      closeButtonText: 'x',
+      position: 'top' 
+    }).present();
   }
 
     validateForm() {
