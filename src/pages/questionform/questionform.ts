@@ -37,7 +37,7 @@ export class QuestionformPage {
     //   this.question.question = 'This is Question No. ' + i;
     //   this.question.choice1 = 'choice 1' + i;
     //   this.question.choice2 = 'choice 2' + i;
-    //   this.question.choice3 = 'choice 3' + i;
+    // this.question.choice3 = 'choice 3' + i;
     //   this.question.choice4 = 'choice 4' + i;
     //   this.question.answer = '1';
     //   this.questionPost
@@ -49,9 +49,6 @@ export class QuestionformPage {
     //     })
     // }
     // this.questionCategory()
-    
-
-
   }
 
   ionViewWillEnter() {
@@ -68,7 +65,6 @@ export class QuestionformPage {
       .set( 'description', 'questions for quiz app' )
       .create( () => {
       }, e => {
-
         console.log(e)
       });
   }
@@ -93,7 +89,6 @@ export class QuestionformPage {
         }, e => alert(e) );
         return;
     }
-
   }
 
   get questions() {
@@ -125,13 +120,11 @@ export class QuestionformPage {
         console.log(e)
         this.track = { error: e };
       });
-
     console.log(this.question.answer)
   }
 
   onClickBack(){
     this.navCtrl.setRoot( HomePage )
-
   }
 
 }

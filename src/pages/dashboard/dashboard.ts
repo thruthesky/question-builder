@@ -61,7 +61,6 @@ export class DashboardPage {
           this.userName = user.displayName;
         }, e=>{})
       }, e => alert('Login : ' + e ) );
-
   }
 
   onDestroy(){
@@ -71,8 +70,6 @@ export class DashboardPage {
            console.log('error:' + e)
         });
   }
-
-
 
   // debounce(callback, wait, immediate){
   //   let timeout;
@@ -89,13 +86,7 @@ export class DashboardPage {
   //   }
   // }
 
-
-
-
-
-
   searchQuestions(ev) {
-
     // let temp;
     let val = ev.target.value;
 
@@ -112,10 +103,8 @@ export class DashboardPage {
     }
   }
 
-
   ionViewWillEnter() {
     //console.log('ionViewWillEnter()');
-    
     this.checkUser();
   }
 
@@ -139,7 +128,6 @@ export class DashboardPage {
         this.questions.push ( {key: key, value: data[key]} );
         // this.searchedItem.push( {key: key, value: data[key]} );
       }
-
   }
 
   getSearched( key? ){
@@ -173,10 +161,9 @@ export class DashboardPage {
   }
 
   doInfinite( infiniteScroll? ) {
-
   this.getQuestions( infiniteScroll );
-
   }
+
   onClickNext(){
     this.previous = this.questions;
     if(! this.noMorePost ){
@@ -190,15 +177,12 @@ export class DashboardPage {
       this.questions = this.previous;
       this.doInfinite()
     }
-
   }
 
   onClickPrevious(){
     this.questions = this.previous
     this.page = this.page - 1;
-    
   }
-
 
   onClickChoice(ansTest, answer){
     console.log(ansTest);
@@ -230,9 +214,6 @@ export class DashboardPage {
     }, e => {
       console.log( 'error: ' + e )
     });
-    
-
-
   }
 
   onRefresh(refresher) {
@@ -243,5 +224,4 @@ export class DashboardPage {
       refresher.complete();
     }, 2000);
   }
-
 }
