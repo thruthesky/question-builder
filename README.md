@@ -1,11 +1,6 @@
 # Quiz-Builder for quiz app
 
 Used Firebase's Authentication and Database service.
-
-##Authentication
-
-    saves basic user login information: uid email/password.
-    other information like name etc. will be saved in the database.
     
 ###Installation*
 
@@ -15,7 +10,7 @@ Used Firebase's Authentication and Database service.
 ##TODO's
 
     ✓*Create Update Delete Questions using fireframe2
-    ✓*Swipe Button
+    ✓*Swipe to show option buttons[Edit,Delete]
     ✓*Pagination/infinite-scroll
     ✓*Authentication
 
